@@ -5,7 +5,70 @@
     <Setting Name="live_Scan" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="clear_on_send" Type="System.Boolean" Scope="User">
+    <Setting Name="refresh_index" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="baud_index" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="campo1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Campo 1</Value>
+    </Setting>
+    <Setting Name="campo2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Campo 2</Value>
+    </Setting>
+    <Setting Name="campo1_un" Type="System.String" Scope="User">
+      <Value Profile="(Default)">-</Value>
+    </Setting>
+    <Setting Name="campo2_un" Type="System.String" Scope="User">
+      <Value Profile="(Default)">-</Value>
+    </Setting>
+    <Setting Name="parametro1" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="parametro2" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="campo3" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Campo 3</Value>
+    </Setting>
+    <Setting Name="campo4" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Campo 4</Value>
+    </Setting>
+    <Setting Name="campo3_un" Type="System.String" Scope="User">
+      <Value Profile="(Default)">-</Value>
+    </Setting>
+    <Setting Name="campo4_un" Type="System.String" Scope="User">
+      <Value Profile="(Default)">-</Value>
+    </Setting>
+    <Setting Name="parametro3" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="parametro4" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="campo5" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Campo 5</Value>
+    </Setting>
+    <Setting Name="campo5_un" Type="System.String" Scope="User">
+      <Value Profile="(Default)">-</Value>
+    </Setting>
+    <Setting Name="parametro5" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ligado1" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ligado2" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ligado3" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ligado4" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ligado5" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>

@@ -8,52 +8,294 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Arduino_Monitor.Properties
-{
-
-
+namespace Arduino_Monitor.Properties {
+    
+    
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
-    {
-
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-
-        public static Settings Default
-        {
-            get
-            {
+        
+        public static Settings Default {
+            get {
                 return defaultInstance;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool live_Scan
-        {
-            get
-            {
+        public bool live_Scan {
+            get {
                 return ((bool)(this["live_Scan"]));
             }
-            set
-            {
+            set {
                 this["live_Scan"] = value;
             }
         }
-
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int refresh_index {
+            get {
+                return ((int)(this["refresh_index"]));
+            }
+            set {
+                this["refresh_index"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
+        public int baud_index {
+            get {
+                return ((int)(this["baud_index"]));
+            }
+            set {
+                this["baud_index"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Campo 1")]
+        public string campo1 {
+            get {
+                return ((string)(this["campo1"]));
+            }
+            set {
+                this["campo1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Campo 2")]
+        public string campo2 {
+            get {
+                return ((string)(this["campo2"]));
+            }
+            set {
+                this["campo2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string campo1_un {
+            get {
+                return ((string)(this["campo1_un"]));
+            }
+            set {
+                this["campo1_un"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string campo2_un {
+            get {
+                return ((string)(this["campo2_un"]));
+            }
+            set {
+                this["campo2_un"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string parametro1 {
+            get {
+                return ((string)(this["parametro1"]));
+            }
+            set {
+                this["parametro1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string parametro2 {
+            get {
+                return ((string)(this["parametro2"]));
+            }
+            set {
+                this["parametro2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Campo 3")]
+        public string campo3 {
+            get {
+                return ((string)(this["campo3"]));
+            }
+            set {
+                this["campo3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Campo 4")]
+        public string campo4 {
+            get {
+                return ((string)(this["campo4"]));
+            }
+            set {
+                this["campo4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string campo3_un {
+            get {
+                return ((string)(this["campo3_un"]));
+            }
+            set {
+                this["campo3_un"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string campo4_un {
+            get {
+                return ((string)(this["campo4_un"]));
+            }
+            set {
+                this["campo4_un"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string parametro3 {
+            get {
+                return ((string)(this["parametro3"]));
+            }
+            set {
+                this["parametro3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string parametro4 {
+            get {
+                return ((string)(this["parametro4"]));
+            }
+            set {
+                this["parametro4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Campo 5")]
+        public string campo5 {
+            get {
+                return ((string)(this["campo5"]));
+            }
+            set {
+                this["campo5"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string campo5_un {
+            get {
+                return ((string)(this["campo5_un"]));
+            }
+            set {
+                this["campo5_un"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string parametro5 {
+            get {
+                return ((string)(this["parametro5"]));
+            }
+            set {
+                this["parametro5"] = value;
+            }
+        }
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool clear_on_send
-        {
-            get
-            {
-                return ((bool)(this["clear_on_send"]));
+        public bool ligado1 {
+            get {
+                return ((bool)(this["ligado1"]));
             }
-            set
-            {
-                this["clear_on_send"] = value;
+            set {
+                this["ligado1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ligado2 {
+            get {
+                return ((bool)(this["ligado2"]));
+            }
+            set {
+                this["ligado2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ligado3 {
+            get {
+                return ((bool)(this["ligado3"]));
+            }
+            set {
+                this["ligado3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ligado4 {
+            get {
+                return ((bool)(this["ligado4"]));
+            }
+            set {
+                this["ligado4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ligado5 {
+            get {
+                return ((bool)(this["ligado5"]));
+            }
+            set {
+                this["ligado5"] = value;
             }
         }
     }

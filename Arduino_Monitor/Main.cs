@@ -14,6 +14,10 @@ namespace Arduino_Monitor
     public partial class Main : Form
     {
         string RxString;
+        string [] parametro = new string[5];
+        int RxID = 0;
+        Config_form Form_conf = null;//declara uma variavel para a janela de configurações
+
         public Main()//não modificar
         {
             InitializeComponent();
@@ -22,9 +26,7 @@ namespace Arduino_Monitor
         /*-------Funções de formulario--------*/
         private void Form1_Load(object sender, EventArgs e)//ao iniciar o programa
         {
-            configurate();//le as configurações
-            dicas();//inicializa as dicas
-
+            //adiciona itens na combobox baud rate
             comboBox2.Items.Add("300");
             comboBox2.Items.Add("1200");
             comboBox2.Items.Add("2400");
@@ -38,7 +40,28 @@ namespace Arduino_Monitor
             comboBox2.Items.Add("230400");
             comboBox2.Items.Add("250000");
 
-            comboBox2.SelectedIndex = 4;
+            //adiciona itens na combobox refresh
+            comboBoxTime.Items.Add("2");
+            comboBoxTime.Items.Add("3");
+            comboBoxTime.Items.Add("4");
+            comboBoxTime.Items.Add("5");
+            comboBoxTime.Items.Add("10");
+            comboBoxTime.Items.Add("15");
+            comboBoxTime.Items.Add("20");
+            comboBoxTime.Items.Add("25");
+            comboBoxTime.Items.Add("30");
+            comboBoxTime.Items.Add("35");
+            comboBoxTime.Items.Add("40");
+            comboBoxTime.Items.Add("45");
+            comboBoxTime.Items.Add("50");
+            comboBoxTime.Items.Add("55");
+            comboBoxTime.Items.Add("60");
+            comboBoxTime.Items.Add("90");
+            comboBoxTime.Items.Add("120");
+
+            Load_labels();//carrega as labels
+            configurate();//le as configurações
+            dicas();//inicializa as dicas
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)//ao fechar o programa
@@ -98,21 +121,11 @@ namespace Arduino_Monitor
 
         }
 
-        private void enviarComandos()//envia os comandos pela serial
+        private void enviarComandos(string str)//envia os comandos pela serial
         {
             if (serialPort1.IsOpen == true)          //porta está aberta
             {
-                if (textBoxEnviar.Text != "")//verifica se a textbox está vazia
-                {
-                    serialPort1.Write(textBoxEnviar.Text);  //envia o texto presente no textbox Enviar
-                    textBoxReceber.AppendText(Environment.NewLine + "Enviado: " + textBoxEnviar.Text);
-                }
-
-                if (Properties.Settings.Default.clear_on_send == true)//verifica a opção clear on send
-                {
-                    textBoxEnviar.Text = "";
-                }
-
+              serialPort1.Write(str);  //envia o texto presente na variavel str
             }
             else
             {
@@ -121,10 +134,10 @@ namespace Arduino_Monitor
         }
 
         private void configurate()//le as configurações
-        {
+        {            
+            timerCOM.Enabled = true;//ativa o timer das portas COMS
+            
             //le a configuração live scan
-            timerCOM.Enabled = true;
-
             if (Properties.Settings.Default.live_Scan == true)
             {
                 checkBox1.Checked = true;
@@ -136,17 +149,43 @@ namespace Arduino_Monitor
                 scanButton.Enabled = true;//ativa o botão scan
             }
 
-            //le a configuração clear on sent
-            if (Properties.Settings.Default.clear_on_send == true)
-            {
-                checkBox2.Checked = true;
-                Properties.Settings.Default.clear_on_send = true;
-                Properties.Settings.Default.Save();//para garantir o carregamento correto da opção
-            }
-            else
-            {
-                checkBox2.Checked = false;
-            }
+            //configura as combo box
+            comboBoxTime.SelectedIndex = Properties.Settings.Default.refresh_index;
+            comboBox2.SelectedIndex = Properties.Settings.Default.baud_index;
+
+        }
+
+        private void Load_labels()//carrega os textos dos labels e os parametros a serem enviados pela serial
+        {
+            //carrega as labels caso eslas esteja ativadas
+            label_Campo1.Text = Properties.Settings.Default.campo1+": ";
+            label_Campo2.Text = Properties.Settings.Default.campo2+": ";
+            label_Campo3.Text = Properties.Settings.Default.campo3 + ": ";
+            label_Campo4.Text = Properties.Settings.Default.campo4 + ": ";
+            label_Campo5.Text = Properties.Settings.Default.campo5 + ": ";
+
+            //carrega os parametros a serem passados para o arduino
+            parametro[0] = Properties.Settings.Default.parametro1;
+            parametro[1] = Properties.Settings.Default.parametro2;
+            parametro[2] = Properties.Settings.Default.parametro3;
+            parametro[3] = Properties.Settings.Default.parametro4;
+            parametro[4] = Properties.Settings.Default.parametro5;
+
+            //desativa os displays
+            if (Properties.Settings.Default.ligado1 == false)
+                display_Campo1.Text = "Off";
+
+            if (Properties.Settings.Default.ligado2 == false)
+                display_Campo2.Text = "Off";
+
+            if (Properties.Settings.Default.ligado3 == false)
+                display_Campo3.Text = "Off";
+
+            if (Properties.Settings.Default.ligado4 == false)
+                display_Campo4.Text = "Off";
+
+            if (Properties.Settings.Default.ligado5 == false)
+                display_Campo5.Text = "Off";
         }
 
         private void dicas()//exibe as caixas de dicas
@@ -154,12 +193,75 @@ namespace Arduino_Monitor
             /*-----dica live scan-----*/
             System.Windows.Forms.ToolTip dicaLiveScan = new System.Windows.Forms.ToolTip();
             dicaLiveScan.SetToolTip(this.checkBox1, "Busca automatica de Portas COM disponiveis");
-            /*-----dica clean on send------*/
-            System.Windows.Forms.ToolTip dicaCleanSend = new System.Windows.Forms.ToolTip();
-            dicaLiveScan.SetToolTip(this.checkBox2, "Apagar comando após o envio");
-            /*-----dica clear button------*/
-            System.Windows.Forms.ToolTip dicaClearBox = new System.Windows.Forms.ToolTip();
-            dicaLiveScan.SetToolTip(this.btClearText, "Limpar Log");
+        }
+
+        private void data_Manager()//gerencia os pedidos de dados e os locais de impressão
+        {
+            if (RxID == 0)
+            {
+                if (Properties.Settings.Default.ligado1 == true)
+                {
+                    enviarComandos(parametro[0]);//solicita o update dos dados ao arduino para o campo 1
+                    RxID = 1;
+                }
+                else
+                {
+                    RxID = 1;
+                    data_Manager();
+                }
+
+            }
+            else if (RxID == 1)
+            {
+                if (Properties.Settings.Default.ligado2 == true)
+                {
+                    enviarComandos(parametro[1]);//solicita o update dos dados ao arduino para o campo 2
+                    RxID = 2;
+                }
+                else
+                {
+                    RxID = 2;
+                    data_Manager();
+                }
+            }
+            else if (RxID == 2)
+            {
+                if (Properties.Settings.Default.ligado3 == true)
+                {
+                    enviarComandos(parametro[2]);//solicita o update dos dados ao arduino para o campo 3
+                    RxID = 3;
+                }
+                else
+                {
+                    RxID = 3;
+                    data_Manager();
+                }
+            }
+            else if (RxID == 3)
+            {
+                if (Properties.Settings.Default.ligado4 == true)
+                {
+                    enviarComandos(parametro[3]);//solicita o update dos dados ao arduino para o campo 4
+                    RxID = 4;
+                }
+                else
+                {
+                    RxID = 4;
+                    data_Manager();
+                }
+            }
+            else if (RxID == 4)
+            {
+                if (Properties.Settings.Default.ligado5 == true)
+                {
+                    enviarComandos(parametro[4]);//solicita o update dos dados ao arduino para o campo 5
+                    RxID = 0;
+                }
+                else
+                {
+                    RxID = 0;
+                }
+            }
         }
 
         /*-------Botões---------------------*/
@@ -176,15 +278,19 @@ namespace Arduino_Monitor
                 catch
                 {
                     return;
-
                 }
                 if (serialPort1.IsOpen)
                 {
-                    btConectar.Text = "Desconectar";
-                    comboBox1.Enabled = false;//desativa o combobox COM port
-                    comboBox2.Enabled = false;//desativa o combobox baud rate
+                    btConectar.Text = "Desconectar";//muda o texto do botão conectar
+
                     scanButton.Enabled = false;//desativa o botão scan
 
+                    comboBox1.Enabled = false;//desativa o combobox COM port
+                    comboBox2.Enabled = false;//desativa o combobox baud rate
+                    comboBoxTime.Enabled = false;//desativa o combobox refresh rate
+                    
+                    timerDATA.Interval = Convert.ToInt32(comboBoxTime.Items[comboBoxTime.SelectedIndex]) * 1000;
+                    timerDATA.Enabled = true;//ativa o timer de refresh dos dados
                 }
             }
             else
@@ -195,6 +301,18 @@ namespace Arduino_Monitor
                     serialPort1.Close();
                     comboBox1.Enabled = true;//ativa o combobox COM port
                     comboBox2.Enabled = true;//ativa o combobox baud rate
+                    comboBoxTime.Enabled = true;//stiva o combobox refresh rate
+
+                    timerDATA.Enabled = false;//desativa o timer de refresh dos dados
+
+                    RxID = 0; //reseta a variavel de controle
+
+                    //reseta os displays
+                    display_Campo1.Text = "-";
+                    display_Campo2.Text = "-";
+                    display_Campo3.Text = "-";
+                    display_Campo4.Text = "-";
+                    display_Campo5.Text = "-";
 
                     if (checkBox1.Checked == false)
                         scanButton.Enabled = true;//ativa o botão scan
@@ -209,19 +327,28 @@ namespace Arduino_Monitor
             }
         }
 
-        private void btEnviar_Click(object sender, EventArgs e)//botão de enviar
-        {
-            enviarComandos();//envia comandos
-        }
-
         private void scanButton_Click(object sender, EventArgs e)//botão Scan
         {
             atualizaListaCOMs();
         }
 
-        private void btClearText_Click(object sender, EventArgs e)//limpa a caixa de recebidos
+        private void btn_Config_Click(object sender, EventArgs e)//botão de configurações
         {
-            textBoxReceber.Text = "";
+            if (Application.OpenForms.OfType<Config_form>().Count() == 0)//verifica se ja existe uma aba aberta
+            {
+                Form_conf = new Config_form();//instancia o formulario filho
+
+                //descobre a posição do form principal para centralizar o filho
+                int x = this.Left + (this.Width / 2) - (Form_conf.Width / 2);
+                int y = this.Top + (this.Height / 2) - (Form_conf.Height / 2);
+
+                Form_conf.Location = new Point(x, y);//seta a posição do formulario filho
+                Form_conf.Show();//exibe o formulario filho
+            }
+            else
+            {
+                Form_conf.Focus();//caso a janela ja esteja aberta, foca na mesma
+            }
         }
 
         /*--------checkbox------------------*/
@@ -243,44 +370,61 @@ namespace Arduino_Monitor
             }
         }
 
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)//clear on sent on/off
+        /*--------Serial Port, receber/enviar/tratar dados---------*/
+        
+        private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)//serial port
         {
-            if (Properties.Settings.Default.clear_on_send == true)
+            RxString = serialPort1.ReadExisting();              //le o dado disponível na serial
+
+           this.Invoke(new EventHandler(trataDadoRecebido));   //chama outra thread para escrever o dado no text box
+        }
+
+        private void trataDadoRecebido(object sender, EventArgs e)//printa o dado recebido do dispositivo no console
+        {
+            if (RxID == 1)
             {
-                Properties.Settings.Default.clear_on_send = false;//altera a configuração do clear on send
-                Properties.Settings.Default.Save();//salva as configurações
+                display_Campo1.Text = RxString +" "+Properties.Settings.Default.campo1_un;//se o dado for uma temperatura, atualiza o campo correspondente
             }
-            else
+            else if (RxID == 2)
             {
-                Properties.Settings.Default.clear_on_send = true;//altera a configuração do clear on send
-                Properties.Settings.Default.Save();//salva as configurações
+                display_Campo2.Text = RxString +" "+ Properties.Settings.Default.campo2_un;//se o dado for uma temperatura, atualiza o campo correspondente
+            }
+            else if (RxID == 3)
+            {
+                display_Campo3.Text = RxString + " " + Properties.Settings.Default.campo3_un;//se o dado for uma temperatura, atualiza o campo correspondente
+            }
+            else if (RxID == 4)
+            {
+                display_Campo4.Text = RxString + " " + Properties.Settings.Default.campo4_un;//se o dado for uma temperatura, atualiza o campo correspondente
+            }
+            else if (RxID == 0)
+            {
+                display_Campo5.Text = RxString + " " + Properties.Settings.Default.campo5_un;//se o dado for uma temperatura, atualiza o campo correspondente
             }
         }
 
-        /*--------Serial Port, receber/enviar/tratar dados---------*/
+        /*--------Timers--------------*/
+        private void timerSaver_Tick(object sender, EventArgs e)//a cada x milisegundos salva as configuraçõesda interface principal
+        {
+            Properties.Settings.Default.refresh_index = comboBoxTime.SelectedIndex;
+            Properties.Settings.Default.baud_index = comboBox2.SelectedIndex;
+
+            Properties.Settings.Default.Save();//salva as configurações
+        }
+
         private void timerCOM_Tick(object sender, EventArgs e)//a cada x milisegundos executa a função
         {
             atualizaListaCOMs();
         }
 
-        private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)//serial port
+        private void timerDATA_Tick(object sender, EventArgs e)//a cada x milisegundos atualiza os dados
         {
-            RxString = serialPort1.ReadExisting();              //le o dado disponível na serial
-            this.Invoke(new EventHandler(trataDadoRecebido));   //chama outra thread para escrever o dado no text box
+            data_Manager();
         }
 
-        private void trataDadoRecebido(object sender, EventArgs e)//printa o dado recebido do dispositivo no console
+        private void timerLoad_Tick(object sender, EventArgs e)// a cada x milisegundos atualiza os labels
         {
-            textBoxReceber.AppendText(Environment.NewLine + RxString);
-        }
-
-        private void textBoxEnviar_KeyPress(object sender, KeyPressEventArgs e)//ao Precionar ENTER na envia os comandos da textbox1
-        {
-            if (e.KeyChar == 13)//se precionado enter
-            {
-                e.Handled = true;//retira o barulho chato ao precionar enter
-                enviarComandos();//envia os comandos
-            }
+            Load_labels();
         }
     }
 }

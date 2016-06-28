@@ -32,20 +32,31 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.btConectar = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.btEnviar = new System.Windows.Forms.Button();
-            this.textBoxEnviar = new System.Windows.Forms.TextBox();
-            this.textBoxReceber = new System.Windows.Forms.TextBox();
             this.timerCOM = new System.Windows.Forms.Timer(this.components);
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.scanButton = new System.Windows.Forms.Button();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.dicaLiveScan = new System.Windows.Forms.ToolTip(this.components);
-            this.dicaCleanOnSend = new System.Windows.Forms.ToolTip(this.components);
-            this.btClearText = new System.Windows.Forms.Button();
-            this.dicaClearBox = new System.Windows.Forms.ToolTip(this.components);
+            this.label_Campo1 = new System.Windows.Forms.Label();
+            this.display_Campo1 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.display_Campo5 = new System.Windows.Forms.Label();
+            this.label_Campo5 = new System.Windows.Forms.Label();
+            this.display_Campo4 = new System.Windows.Forms.Label();
+            this.label_Campo4 = new System.Windows.Forms.Label();
+            this.label_Campo3 = new System.Windows.Forms.Label();
+            this.display_Campo3 = new System.Windows.Forms.Label();
+            this.display_Campo2 = new System.Windows.Forms.Label();
+            this.label_Campo2 = new System.Windows.Forms.Label();
+            this.timerDATA = new System.Windows.Forms.Timer(this.components);
+            this.comboBoxTime = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.timerSaver = new System.Windows.Forms.Timer(this.components);
+            this.timerLoad = new System.Windows.Forms.Timer(this.components);
+            this.btn_Config = new System.Windows.Forms.Button();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btConectar
@@ -66,36 +77,6 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 1;
-            // 
-            // btEnviar
-            // 
-            this.btEnviar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btEnviar.Location = new System.Drawing.Point(13, 42);
-            this.btEnviar.Name = "btEnviar";
-            this.btEnviar.Size = new System.Drawing.Size(96, 23);
-            this.btEnviar.TabIndex = 2;
-            this.btEnviar.Text = "Enviar";
-            this.btEnviar.UseVisualStyleBackColor = true;
-            this.btEnviar.Click += new System.EventHandler(this.btEnviar_Click);
-            // 
-            // textBoxEnviar
-            // 
-            this.textBoxEnviar.Location = new System.Drawing.Point(115, 44);
-            this.textBoxEnviar.Name = "textBoxEnviar";
-            this.textBoxEnviar.Size = new System.Drawing.Size(633, 20);
-            this.textBoxEnviar.TabIndex = 3;
-            this.textBoxEnviar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxEnviar_KeyPress);
-            // 
-            // textBoxReceber
-            // 
-            this.textBoxReceber.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.textBoxReceber.Location = new System.Drawing.Point(13, 86);
-            this.textBoxReceber.Multiline = true;
-            this.textBoxReceber.Name = "textBoxReceber";
-            this.textBoxReceber.ReadOnly = true;
-            this.textBoxReceber.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxReceber.Size = new System.Drawing.Size(735, 163);
-            this.textBoxReceber.TabIndex = 4;
             // 
             // timerCOM
             // 
@@ -148,42 +129,178 @@
             this.scanButton.UseVisualStyleBackColor = true;
             this.scanButton.Click += new System.EventHandler(this.scanButton_Click);
             // 
-            // checkBox2
+            // label_Campo1
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(591, 17);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(104, 17);
-            this.checkBox2.TabIndex = 9;
-            this.checkBox2.Text = "Limpar ao enviar";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            this.label_Campo1.AutoSize = true;
+            this.label_Campo1.Location = new System.Drawing.Point(7, 19);
+            this.label_Campo1.Name = "label_Campo1";
+            this.label_Campo1.Size = new System.Drawing.Size(52, 13);
+            this.label_Campo1.TabIndex = 9;
+            this.label_Campo1.Text = "Campo 1:";
+            this.label_Campo1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btClearText
+            // display_Campo1
             // 
-            this.btClearText.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btClearText.Image = global::Arduino_Monitor.Properties.Resources.clear;
-            this.btClearText.Location = new System.Drawing.Point(716, 9);
-            this.btClearText.Name = "btClearText";
-            this.btClearText.Size = new System.Drawing.Size(32, 32);
-            this.btClearText.TabIndex = 10;
-            this.btClearText.UseVisualStyleBackColor = true;
-            this.btClearText.Click += new System.EventHandler(this.btClearText_Click);
+            this.display_Campo1.AutoSize = true;
+            this.display_Campo1.Location = new System.Drawing.Point(22, 41);
+            this.display_Campo1.Name = "display_Campo1";
+            this.display_Campo1.Size = new System.Drawing.Size(10, 13);
+            this.display_Campo1.TabIndex = 10;
+            this.display_Campo1.Text = "-";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.display_Campo5);
+            this.panel1.Controls.Add(this.label_Campo5);
+            this.panel1.Controls.Add(this.display_Campo4);
+            this.panel1.Controls.Add(this.label_Campo4);
+            this.panel1.Controls.Add(this.label_Campo3);
+            this.panel1.Controls.Add(this.display_Campo3);
+            this.panel1.Controls.Add(this.display_Campo2);
+            this.panel1.Controls.Add(this.label_Campo2);
+            this.panel1.Controls.Add(this.label_Campo1);
+            this.panel1.Controls.Add(this.display_Campo1);
+            this.panel1.Location = new System.Drawing.Point(13, 42);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(785, 207);
+            this.panel1.TabIndex = 11;
+            // 
+            // display_Campo5
+            // 
+            this.display_Campo5.AutoSize = true;
+            this.display_Campo5.Location = new System.Drawing.Point(655, 41);
+            this.display_Campo5.Name = "display_Campo5";
+            this.display_Campo5.Size = new System.Drawing.Size(10, 13);
+            this.display_Campo5.TabIndex = 18;
+            this.display_Campo5.Text = "-";
+            // 
+            // label_Campo5
+            // 
+            this.label_Campo5.AutoSize = true;
+            this.label_Campo5.Location = new System.Drawing.Point(640, 19);
+            this.label_Campo5.Name = "label_Campo5";
+            this.label_Campo5.Size = new System.Drawing.Size(52, 13);
+            this.label_Campo5.TabIndex = 17;
+            this.label_Campo5.Text = "Campo 5:";
+            // 
+            // display_Campo4
+            // 
+            this.display_Campo4.AutoSize = true;
+            this.display_Campo4.Location = new System.Drawing.Point(501, 41);
+            this.display_Campo4.Name = "display_Campo4";
+            this.display_Campo4.Size = new System.Drawing.Size(10, 13);
+            this.display_Campo4.TabIndex = 16;
+            this.display_Campo4.Text = "-";
+            // 
+            // label_Campo4
+            // 
+            this.label_Campo4.AutoSize = true;
+            this.label_Campo4.Location = new System.Drawing.Point(484, 19);
+            this.label_Campo4.Name = "label_Campo4";
+            this.label_Campo4.Size = new System.Drawing.Size(52, 13);
+            this.label_Campo4.TabIndex = 15;
+            this.label_Campo4.Text = "Campo 4:";
+            // 
+            // label_Campo3
+            // 
+            this.label_Campo3.AutoSize = true;
+            this.label_Campo3.Location = new System.Drawing.Point(329, 19);
+            this.label_Campo3.Name = "label_Campo3";
+            this.label_Campo3.Size = new System.Drawing.Size(52, 13);
+            this.label_Campo3.TabIndex = 13;
+            this.label_Campo3.Text = "Campo 3:";
+            this.label_Campo3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // display_Campo3
+            // 
+            this.display_Campo3.AutoSize = true;
+            this.display_Campo3.Location = new System.Drawing.Point(342, 41);
+            this.display_Campo3.Name = "display_Campo3";
+            this.display_Campo3.Size = new System.Drawing.Size(10, 13);
+            this.display_Campo3.TabIndex = 14;
+            this.display_Campo3.Text = "-";
+            // 
+            // display_Campo2
+            // 
+            this.display_Campo2.AutoSize = true;
+            this.display_Campo2.Location = new System.Drawing.Point(176, 41);
+            this.display_Campo2.Name = "display_Campo2";
+            this.display_Campo2.Size = new System.Drawing.Size(10, 13);
+            this.display_Campo2.TabIndex = 12;
+            this.display_Campo2.Text = "-";
+            // 
+            // label_Campo2
+            // 
+            this.label_Campo2.AutoSize = true;
+            this.label_Campo2.Location = new System.Drawing.Point(162, 19);
+            this.label_Campo2.Name = "label_Campo2";
+            this.label_Campo2.Size = new System.Drawing.Size(52, 13);
+            this.label_Campo2.TabIndex = 11;
+            this.label_Campo2.Text = "Campo 2:";
+            // 
+            // timerDATA
+            // 
+            this.timerDATA.Interval = 2000;
+            this.timerDATA.Tick += new System.EventHandler(this.timerDATA_Tick);
+            // 
+            // comboBoxTime
+            // 
+            this.comboBoxTime.FormattingEnabled = true;
+            this.comboBoxTime.Location = new System.Drawing.Point(602, 13);
+            this.comboBoxTime.Name = "comboBoxTime";
+            this.comboBoxTime.Size = new System.Drawing.Size(47, 21);
+            this.comboBoxTime.TabIndex = 12;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(655, 17);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(99, 13);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Refresh Time (seg.)";
+            // 
+            // timerSaver
+            // 
+            this.timerSaver.Enabled = true;
+            this.timerSaver.Interval = 5000;
+            this.timerSaver.Tick += new System.EventHandler(this.timerSaver_Tick);
+            // 
+            // timerLoad
+            // 
+            this.timerLoad.Enabled = true;
+            this.timerLoad.Interval = 1000;
+            this.timerLoad.Tick += new System.EventHandler(this.timerLoad_Tick);
+            // 
+            // btn_Config
+            // 
+            this.btn_Config.BackgroundImage = global::Arduino_Monitor.Properties.Resources.setings;
+            this.btn_Config.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_Config.FlatAppearance.BorderSize = 0;
+            this.btn_Config.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Config.Location = new System.Drawing.Point(767, 6);
+            this.btn_Config.Name = "btn_Config";
+            this.btn_Config.Size = new System.Drawing.Size(32, 32);
+            this.btn_Config.TabIndex = 14;
+            this.btn_Config.UseVisualStyleBackColor = false;
+            this.btn_Config.Click += new System.EventHandler(this.btn_Config_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(760, 261);
-            this.Controls.Add(this.btClearText);
-            this.Controls.Add(this.checkBox2);
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ClientSize = new System.Drawing.Size(811, 261);
+            this.Controls.Add(this.btn_Config);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.comboBoxTime);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.scanButton);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.textBoxReceber);
-            this.Controls.Add(this.textBoxEnviar);
-            this.Controls.Add(this.btEnviar);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.btConectar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -191,8 +308,10 @@
             this.MaximizeBox = false;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Arduino Serial Comunicator";
+            this.Text = "Arduino Monitor";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -202,20 +321,30 @@
 
         private System.Windows.Forms.Button btConectar;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button btEnviar;
-        private System.Windows.Forms.TextBox textBoxEnviar;
-        private System.Windows.Forms.TextBox textBoxReceber;
         private System.Windows.Forms.Timer timerCOM;
         private System.IO.Ports.SerialPort serialPort1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button scanButton;
-        private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.ToolTip dicaLiveScan;
-        private System.Windows.Forms.ToolTip dicaCleanOnSend;
-        private System.Windows.Forms.Button btClearText;
-        private System.Windows.Forms.ToolTip dicaClearBox;
+        private System.Windows.Forms.Label label_Campo1;
+        private System.Windows.Forms.Label display_Campo1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Timer timerDATA;
+        private System.Windows.Forms.Label display_Campo2;
+        private System.Windows.Forms.Label label_Campo2;
+        private System.Windows.Forms.ComboBox comboBoxTime;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Timer timerSaver;
+        public System.Windows.Forms.Timer timerLoad;
+        private System.Windows.Forms.Button btn_Config;
+        private System.Windows.Forms.Label display_Campo4;
+        private System.Windows.Forms.Label label_Campo4;
+        private System.Windows.Forms.Label label_Campo3;
+        private System.Windows.Forms.Label display_Campo3;
+        private System.Windows.Forms.Label display_Campo5;
+        private System.Windows.Forms.Label label_Campo5;
     }
 }
 
