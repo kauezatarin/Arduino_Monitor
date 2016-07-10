@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports; // necessário para ter acesso as portas
+using System.Threading;
 
 namespace Arduino_Monitor
 {
@@ -62,6 +63,8 @@ namespace Arduino_Monitor
             Load_labels();//carrega as labels
             configurate();//le as configurações
             dicas();//inicializa as dicas
+
+            this.Text = "Arduino Monitor  "+ ObterVersaoApp();
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)//ao fechar o programa
@@ -129,7 +132,7 @@ namespace Arduino_Monitor
             }
             else
             {
-                MessageBox.Show("Conecte-se primeiro!", "Erro");
+                Disconnected(); //detecta que o dispositivo foi desconectado
             }
         }
 
@@ -263,6 +266,45 @@ namespace Arduino_Monitor
                 }
             }
         }
+        
+        private void Disconnected()//se o dispositivo for desconectado
+        {
+            try
+            {
+                serialPort1.Close();
+                comboBox1.Enabled = true;//ativa o combobox COM port
+                comboBox2.Enabled = true;//ativa o combobox baud rate
+                comboBoxTime.Enabled = true;//ativa o combobox refresh rate
+                resetButton.Enabled = false;//desativa o botão de reset do dispositivo
+
+                timerDATA.Enabled = false;//desativa o timer de refresh dos dados
+
+                RxID = 0; //reseta a variavel de controle
+
+                //reseta os displays
+                display_Campo1.Text = "-";
+                display_Campo2.Text = "-";
+                display_Campo3.Text = "-";
+                display_Campo4.Text = "-";
+                display_Campo5.Text = "-";
+
+                if (checkBox1.Checked == false)
+                    scanButton.Enabled = true;//ativa o botão scan
+
+                btConectar.Text = "Conectar";
+
+                MessageBox.Show("Dispositivo desconectado!", "Erro", MessageBoxButtons.OK ,MessageBoxIcon.Error);
+            }
+            catch
+            {
+                return;
+            }
+        }
+
+        private string ObterVersaoApp()//retorna a versão do programa
+        {
+            return string.Format("[versão {0}]", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
+        }
 
         /*-------Botões---------------------*/
         private void btConectar_Click(object sender, EventArgs e)//botão de conectar
@@ -273,6 +315,7 @@ namespace Arduino_Monitor
                 {
                     serialPort1.PortName = comboBox1.Items[comboBox1.SelectedIndex].ToString();
                     serialPort1.BaudRate = Convert.ToInt32(comboBox2.Items[comboBox2.SelectedIndex]);
+                    serialPort1.DtrEnable = false;
                     serialPort1.Open();
                 }
                 catch
@@ -282,6 +325,7 @@ namespace Arduino_Monitor
                 if (serialPort1.IsOpen)
                 {
                     btConectar.Text = "Desconectar";//muda o texto do botão conectar
+                    resetButton.Enabled = true;//ativa o botão de reset do dispositivo
 
                     scanButton.Enabled = false;//desativa o botão scan
 
@@ -301,7 +345,8 @@ namespace Arduino_Monitor
                     serialPort1.Close();
                     comboBox1.Enabled = true;//ativa o combobox COM port
                     comboBox2.Enabled = true;//ativa o combobox baud rate
-                    comboBoxTime.Enabled = true;//stiva o combobox refresh rate
+                    comboBoxTime.Enabled = true;//ativa o combobox refresh rate
+                    resetButton.Enabled = false;//desativa o botão de reset do dispositivo
 
                     timerDATA.Enabled = false;//desativa o timer de refresh dos dados
 
@@ -348,6 +393,16 @@ namespace Arduino_Monitor
             else
             {
                 Form_conf.Focus();//caso a janela ja esteja aberta, foca na mesma
+            }
+        }
+        
+        private void resetButton_Click(object sender, EventArgs e)//botão que reinicia o despositivo
+        {
+            if (MessageBox.Show("Tem certeza que deseja reiniciar o dispositivo?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                serialPort1.DtrEnable = true;
+                Thread.Sleep(1000);
+                serialPort1.DtrEnable = false;
             }
         }
 

@@ -56,6 +56,7 @@
             this.timerSaver = new System.Windows.Forms.Timer(this.components);
             this.timerLoad = new System.Windows.Forms.Timer(this.components);
             this.btn_Config = new System.Windows.Forms.Button();
+            this.resetButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -152,6 +153,7 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.resetButton);
             this.panel1.Controls.Add(this.display_Campo5);
             this.panel1.Controls.Add(this.label_Campo5);
             this.panel1.Controls.Add(this.display_Campo4);
@@ -287,6 +289,17 @@
             this.btn_Config.UseVisualStyleBackColor = false;
             this.btn_Config.Click += new System.EventHandler(this.btn_Config_Click);
             // 
+            // resetButton
+            // 
+            this.resetButton.Enabled = false;
+            this.resetButton.Location = new System.Drawing.Point(658, 177);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(120, 23);
+            this.resetButton.TabIndex = 15;
+            this.resetButton.Text = "Reiniciar Dispositivo";
+            this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -345,6 +358,7 @@
         private System.Windows.Forms.Label display_Campo3;
         private System.Windows.Forms.Label display_Campo5;
         private System.Windows.Forms.Label label_Campo5;
+        private System.Windows.Forms.Button resetButton;
     }
 }
 
