@@ -31,17 +31,17 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.btConectar = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxPort = new System.Windows.Forms.ComboBox();
             this.timerCOM = new System.Windows.Forms.Timer(this.components);
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBoxBaud = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.scanButton = new System.Windows.Forms.Button();
-            this.dicaLiveScan = new System.Windows.Forms.ToolTip(this.components);
+            this.cb_LiveScan = new System.Windows.Forms.CheckBox();
+            this.btScan = new System.Windows.Forms.Button();
             this.label_Campo1 = new System.Windows.Forms.Label();
             this.display_Campo1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btReset = new System.Windows.Forms.Button();
             this.display_Campo5 = new System.Windows.Forms.Label();
             this.label_Campo5 = new System.Windows.Forms.Label();
             this.display_Campo4 = new System.Windows.Forms.Label();
@@ -56,7 +56,6 @@
             this.timerSaver = new System.Windows.Forms.Timer(this.components);
             this.timerLoad = new System.Windows.Forms.Timer(this.components);
             this.btn_Config = new System.Windows.Forms.Button();
-            this.resetButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,13 +70,13 @@
             this.btConectar.UseVisualStyleBackColor = true;
             this.btConectar.Click += new System.EventHandler(this.btConectar_Click);
             // 
-            // comboBox1
+            // comboBoxPort
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(115, 14);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 1;
+            this.comboBoxPort.FormattingEnabled = true;
+            this.comboBoxPort.Location = new System.Drawing.Point(115, 14);
+            this.comboBoxPort.Name = "comboBoxPort";
+            this.comboBoxPort.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxPort.TabIndex = 1;
             // 
             // timerCOM
             // 
@@ -88,13 +87,13 @@
             // 
             this.serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort1_DataReceived);
             // 
-            // comboBox2
+            // comboBoxBaud
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(260, 14);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(78, 21);
-            this.comboBox2.TabIndex = 5;
+            this.comboBoxBaud.FormattingEnabled = true;
+            this.comboBoxBaud.Location = new System.Drawing.Point(260, 14);
+            this.comboBoxBaud.Name = "comboBoxBaud";
+            this.comboBoxBaud.Size = new System.Drawing.Size(78, 21);
+            this.comboBoxBaud.TabIndex = 5;
             // 
             // label1
             // 
@@ -106,29 +105,29 @@
             this.label1.Text = "Baud";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // checkBox1
+            // cb_LiveScan
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(510, 18);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(74, 17);
-            this.checkBox1.TabIndex = 7;
-            this.checkBox1.Text = "Live Scan";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.cb_LiveScan.AutoSize = true;
+            this.cb_LiveScan.Checked = true;
+            this.cb_LiveScan.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_LiveScan.Location = new System.Drawing.Point(510, 18);
+            this.cb_LiveScan.Name = "cb_LiveScan";
+            this.cb_LiveScan.Size = new System.Drawing.Size(74, 17);
+            this.cb_LiveScan.TabIndex = 7;
+            this.cb_LiveScan.Text = "Live Scan";
+            this.cb_LiveScan.UseVisualStyleBackColor = true;
+            this.cb_LiveScan.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // scanButton
+            // btScan
             // 
-            this.scanButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.scanButton.Location = new System.Drawing.Point(394, 13);
-            this.scanButton.Name = "scanButton";
-            this.scanButton.Size = new System.Drawing.Size(75, 23);
-            this.scanButton.TabIndex = 8;
-            this.scanButton.Text = "Scan";
-            this.scanButton.UseVisualStyleBackColor = true;
-            this.scanButton.Click += new System.EventHandler(this.scanButton_Click);
+            this.btScan.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btScan.Location = new System.Drawing.Point(394, 13);
+            this.btScan.Name = "btScan";
+            this.btScan.Size = new System.Drawing.Size(75, 23);
+            this.btScan.TabIndex = 8;
+            this.btScan.Text = "Scan";
+            this.btScan.UseVisualStyleBackColor = true;
+            this.btScan.Click += new System.EventHandler(this.scanButton_Click);
             // 
             // label_Campo1
             // 
@@ -153,7 +152,7 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.resetButton);
+            this.panel1.Controls.Add(this.btReset);
             this.panel1.Controls.Add(this.display_Campo5);
             this.panel1.Controls.Add(this.label_Campo5);
             this.panel1.Controls.Add(this.display_Campo4);
@@ -168,6 +167,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(785, 207);
             this.panel1.TabIndex = 11;
+            // 
+            // btReset
+            // 
+            this.btReset.Enabled = false;
+            this.btReset.Location = new System.Drawing.Point(658, 177);
+            this.btReset.Name = "btReset";
+            this.btReset.Size = new System.Drawing.Size(120, 23);
+            this.btReset.TabIndex = 15;
+            this.btReset.Text = "Reiniciar Dispositivo";
+            this.btReset.UseVisualStyleBackColor = true;
+            this.btReset.Click += new System.EventHandler(this.resetButton_Click);
             // 
             // display_Campo5
             // 
@@ -289,17 +299,6 @@
             this.btn_Config.UseVisualStyleBackColor = false;
             this.btn_Config.Click += new System.EventHandler(this.btn_Config_Click);
             // 
-            // resetButton
-            // 
-            this.resetButton.Enabled = false;
-            this.resetButton.Location = new System.Drawing.Point(658, 177);
-            this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(120, 23);
-            this.resetButton.TabIndex = 15;
-            this.resetButton.Text = "Reiniciar Dispositivo";
-            this.resetButton.UseVisualStyleBackColor = true;
-            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -310,11 +309,11 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.comboBoxTime);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.scanButton);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.btScan);
+            this.Controls.Add(this.cb_LiveScan);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBoxBaud);
+            this.Controls.Add(this.comboBoxPort);
             this.Controls.Add(this.btConectar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -333,14 +332,13 @@
         #endregion
 
         private System.Windows.Forms.Button btConectar;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxPort;
         private System.Windows.Forms.Timer timerCOM;
         private System.IO.Ports.SerialPort serialPort1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBoxBaud;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Button scanButton;
-        private System.Windows.Forms.ToolTip dicaLiveScan;
+        private System.Windows.Forms.CheckBox cb_LiveScan;
+        private System.Windows.Forms.Button btScan;
         private System.Windows.Forms.Label label_Campo1;
         private System.Windows.Forms.Label display_Campo1;
         private System.Windows.Forms.Panel panel1;
@@ -358,7 +356,7 @@
         private System.Windows.Forms.Label display_Campo3;
         private System.Windows.Forms.Label display_Campo5;
         private System.Windows.Forms.Label label_Campo5;
-        private System.Windows.Forms.Button resetButton;
+        private System.Windows.Forms.Button btReset;
     }
 }
 

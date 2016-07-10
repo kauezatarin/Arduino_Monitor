@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports; // necessário para ter acesso as portas
 using System.Threading;
+using System.Reflection;//necessário para pegar a versão do programa
 
 namespace Arduino_Monitor
 {
@@ -28,18 +29,18 @@ namespace Arduino_Monitor
         private void Form1_Load(object sender, EventArgs e)//ao iniciar o programa
         {
             //adiciona itens na combobox baud rate
-            comboBox2.Items.Add("300");
-            comboBox2.Items.Add("1200");
-            comboBox2.Items.Add("2400");
-            comboBox2.Items.Add("4800");
-            comboBox2.Items.Add("9600");
-            comboBox2.Items.Add("19200");
-            comboBox2.Items.Add("38400");
-            comboBox2.Items.Add("57600");
-            comboBox2.Items.Add("74880");
-            comboBox2.Items.Add("115200");
-            comboBox2.Items.Add("230400");
-            comboBox2.Items.Add("250000");
+            comboBoxBaud.Items.Add("300");
+            comboBoxBaud.Items.Add("1200");
+            comboBoxBaud.Items.Add("2400");
+            comboBoxBaud.Items.Add("4800");
+            comboBoxBaud.Items.Add("9600");
+            comboBoxBaud.Items.Add("19200");
+            comboBoxBaud.Items.Add("38400");
+            comboBoxBaud.Items.Add("57600");
+            comboBoxBaud.Items.Add("74880");
+            comboBoxBaud.Items.Add("115200");
+            comboBoxBaud.Items.Add("230400");
+            comboBoxBaud.Items.Add("250000");
 
             //adiciona itens na combobox refresh
             comboBoxTime.Items.Add("2");
@@ -83,11 +84,11 @@ namespace Arduino_Monitor
             quantDiferente = false;
 
             //se a quantidade de portas mudou
-            if (comboBox1.Items.Count == SerialPort.GetPortNames().Length)
+            if (comboBoxPort.Items.Count == SerialPort.GetPortNames().Length)
             {
                 foreach (string s in SerialPort.GetPortNames())
                 {
-                    if (comboBox1.Items[i++].Equals(s) == false)
+                    if (comboBoxPort.Items[i++].Equals(s) == false)
                     {
                         quantDiferente = true;
                     }
@@ -105,22 +106,22 @@ namespace Arduino_Monitor
             }
 
             //limpa comboBox
-            comboBox1.Items.Clear();
+            comboBoxPort.Items.Clear();
             int counter = 0;
 
             //adiciona todas as COM diponíveis na lista
             foreach (string s in SerialPort.GetPortNames())
             {
-                comboBox1.Items.Add(s);
+                comboBoxPort.Items.Add(s);
                 counter++;
             }
 
             //seleciona a primeira posição da lista
             if (counter != 0)//se a lista não estiver vazia
-                comboBox1.SelectedIndex = 0;
+                comboBoxPort.SelectedIndex = 0;
             else//se a lista estiver vazia
-                comboBox1.Items.Add("");
-            comboBox1.SelectedIndex = 0;
+                comboBoxPort.Items.Add("");
+            comboBoxPort.SelectedIndex = 0;
 
         }
 
@@ -143,18 +144,18 @@ namespace Arduino_Monitor
             //le a configuração live scan
             if (Properties.Settings.Default.live_Scan == true)
             {
-                checkBox1.Checked = true;
-                scanButton.Enabled = false;//desativa o botão scan
+                cb_LiveScan.Checked = true;
+                btScan.Enabled = false;//desativa o botão scan
             }
             else
             {
-                checkBox1.Checked = false;
-                scanButton.Enabled = true;//ativa o botão scan
+                cb_LiveScan.Checked = false;
+                btScan.Enabled = true;//ativa o botão scan
             }
 
             //configura as combo box
             comboBoxTime.SelectedIndex = Properties.Settings.Default.refresh_index;
-            comboBox2.SelectedIndex = Properties.Settings.Default.baud_index;
+            comboBoxBaud.SelectedIndex = Properties.Settings.Default.baud_index;
 
         }
 
@@ -195,7 +196,35 @@ namespace Arduino_Monitor
         {
             /*-----dica live scan-----*/
             System.Windows.Forms.ToolTip dicaLiveScan = new System.Windows.Forms.ToolTip();
-            dicaLiveScan.SetToolTip(this.checkBox1, "Busca automatica de Portas COM disponiveis");
+            dicaLiveScan.SetToolTip(this.cb_LiveScan, "Busca automatica de dispositivos");
+
+            /*-----dica Refresh Time-----*/
+            System.Windows.Forms.ToolTip dicaRefresh = new System.Windows.Forms.ToolTip();
+            dicaRefresh.SetToolTip(this.comboBoxTime, "Tempo entre as solicitações enviadas ao dispositivo");
+
+            /*-----dica Opções-----*/
+            System.Windows.Forms.ToolTip dicaOpcoes = new System.Windows.Forms.ToolTip();
+            dicaOpcoes.SetToolTip(this.btn_Config, "Opções");
+
+            /*-----dica Baud-----*/
+            System.Windows.Forms.ToolTip dicaBaud = new System.Windows.Forms.ToolTip();
+            dicaBaud.SetToolTip(this.comboBoxBaud, "Velocidade de comunicação");
+
+            /*-----dica COM Port-----*/
+            System.Windows.Forms.ToolTip dicaCOM = new System.Windows.Forms.ToolTip();
+            dicaCOM.SetToolTip(this.comboBoxPort, "Selecione a porta COM em que o dispositivo está conectado");
+
+            /*-----dica Conectar-----*/
+            System.Windows.Forms.ToolTip dicaConectar = new System.Windows.Forms.ToolTip();
+            dicaConectar.SetToolTip(this.btConectar, "Conectar ao dispositivo selecionado");
+
+            /*-----dica Scan-----*/
+            System.Windows.Forms.ToolTip dicaScan = new System.Windows.Forms.ToolTip();
+            dicaScan.SetToolTip(this.btScan, "Procurar por dispositivos");
+
+            /*-----dica Resete-----*/
+            System.Windows.Forms.ToolTip dicaReset = new System.Windows.Forms.ToolTip();
+            dicaReset.SetToolTip(this.btReset, "Reiniciar dispositivo");
         }
 
         private void data_Manager()//gerencia os pedidos de dados e os locais de impressão
@@ -272,10 +301,10 @@ namespace Arduino_Monitor
             try
             {
                 serialPort1.Close();
-                comboBox1.Enabled = true;//ativa o combobox COM port
-                comboBox2.Enabled = true;//ativa o combobox baud rate
+                comboBoxPort.Enabled = true;//ativa o combobox COM port
+                comboBoxBaud.Enabled = true;//ativa o combobox baud rate
                 comboBoxTime.Enabled = true;//ativa o combobox refresh rate
-                resetButton.Enabled = false;//desativa o botão de reset do dispositivo
+                btReset.Enabled = false;//desativa o botão de reset do dispositivo
 
                 timerDATA.Enabled = false;//desativa o timer de refresh dos dados
 
@@ -288,8 +317,8 @@ namespace Arduino_Monitor
                 display_Campo4.Text = "-";
                 display_Campo5.Text = "-";
 
-                if (checkBox1.Checked == false)
-                    scanButton.Enabled = true;//ativa o botão scan
+                if (cb_LiveScan.Checked == false)
+                    btScan.Enabled = true;//ativa o botão scan
 
                 btConectar.Text = "Conectar";
 
@@ -303,7 +332,7 @@ namespace Arduino_Monitor
 
         private string ObterVersaoApp()//retorna a versão do programa
         {
-            return string.Format("[versão {0}]", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
+            return string.Format("[versão {0}]", Assembly.GetExecutingAssembly().GetName().Version);
         }
 
         /*-------Botões---------------------*/
@@ -313,8 +342,8 @@ namespace Arduino_Monitor
             {
                 try
                 {
-                    serialPort1.PortName = comboBox1.Items[comboBox1.SelectedIndex].ToString();
-                    serialPort1.BaudRate = Convert.ToInt32(comboBox2.Items[comboBox2.SelectedIndex]);
+                    serialPort1.PortName = comboBoxPort.Items[comboBoxPort.SelectedIndex].ToString();
+                    serialPort1.BaudRate = Convert.ToInt32(comboBoxBaud.Items[comboBoxBaud.SelectedIndex]);
                     serialPort1.DtrEnable = false;
                     serialPort1.Open();
                 }
@@ -325,12 +354,12 @@ namespace Arduino_Monitor
                 if (serialPort1.IsOpen)
                 {
                     btConectar.Text = "Desconectar";//muda o texto do botão conectar
-                    resetButton.Enabled = true;//ativa o botão de reset do dispositivo
+                    btReset.Enabled = true;//ativa o botão de reset do dispositivo
 
-                    scanButton.Enabled = false;//desativa o botão scan
+                    btScan.Enabled = false;//desativa o botão scan
 
-                    comboBox1.Enabled = false;//desativa o combobox COM port
-                    comboBox2.Enabled = false;//desativa o combobox baud rate
+                    comboBoxPort.Enabled = false;//desativa o combobox COM port
+                    comboBoxBaud.Enabled = false;//desativa o combobox baud rate
                     comboBoxTime.Enabled = false;//desativa o combobox refresh rate
                     
                     timerDATA.Interval = Convert.ToInt32(comboBoxTime.Items[comboBoxTime.SelectedIndex]) * 1000;
@@ -343,10 +372,10 @@ namespace Arduino_Monitor
                 try
                 {
                     serialPort1.Close();
-                    comboBox1.Enabled = true;//ativa o combobox COM port
-                    comboBox2.Enabled = true;//ativa o combobox baud rate
+                    comboBoxPort.Enabled = true;//ativa o combobox COM port
+                    comboBoxBaud.Enabled = true;//ativa o combobox baud rate
                     comboBoxTime.Enabled = true;//ativa o combobox refresh rate
-                    resetButton.Enabled = false;//desativa o botão de reset do dispositivo
+                    btReset.Enabled = false;//desativa o botão de reset do dispositivo
 
                     timerDATA.Enabled = false;//desativa o timer de refresh dos dados
 
@@ -359,8 +388,8 @@ namespace Arduino_Monitor
                     display_Campo4.Text = "-";
                     display_Campo5.Text = "-";
 
-                    if (checkBox1.Checked == false)
-                        scanButton.Enabled = true;//ativa o botão scan
+                    if (cb_LiveScan.Checked == false)
+                        btScan.Enabled = true;//ativa o botão scan
 
                     btConectar.Text = "Conectar";
                 }
@@ -414,14 +443,14 @@ namespace Arduino_Monitor
                 timerCOM.Enabled = false;
                 Properties.Settings.Default.live_Scan = false;//altera a configuração na sessão
                 Properties.Settings.Default.Save();//salva as configurações
-                scanButton.Enabled = true;//ativa o botão scan
+                btScan.Enabled = true;//ativa o botão scan
             }
             else
             {
                 timerCOM.Enabled = true;
                 Properties.Settings.Default.live_Scan = true;//altera a configuração do live scan
                 Properties.Settings.Default.Save();//salva as configurações
-                scanButton.Enabled = false;//desativa o botão scan
+                btScan.Enabled = false;//desativa o botão scan
             }
         }
 
@@ -462,7 +491,7 @@ namespace Arduino_Monitor
         private void timerSaver_Tick(object sender, EventArgs e)//a cada x milisegundos salva as configuraçõesda interface principal
         {
             Properties.Settings.Default.refresh_index = comboBoxTime.SelectedIndex;
-            Properties.Settings.Default.baud_index = comboBox2.SelectedIndex;
+            Properties.Settings.Default.baud_index = comboBoxBaud.SelectedIndex;
 
             Properties.Settings.Default.Save();//salva as configurações
         }
