@@ -15,7 +15,7 @@ parameter settings, that allow the user to request the right data from the conne
 * Send requests interval settings
 * Fields ON/OFF settings
 
-###Future Features:
+####Future Features:
 
 * Log System
 * Save gathered data to a file
