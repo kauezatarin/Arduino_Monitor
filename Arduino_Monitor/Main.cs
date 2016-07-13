@@ -478,18 +478,26 @@ namespace Arduino_Monitor
             else if (RxID == 2)
             {
                 display_Campo2.Text = RxString +" "+ Properties.Settings.Default.campo2_un;//se o dado for uma temperatura, atualiza o campo correspondente
+                if (Application.OpenForms.OfType<Graphic_form>().Count() > 0)
+                    Form_plotter.inserir(Convert.ToDouble(RxString), "Field2");//manda para o gráfico os dados
             }
             else if (RxID == 3)
             {
                 display_Campo3.Text = RxString + " " + Properties.Settings.Default.campo3_un;//se o dado for uma temperatura, atualiza o campo correspondente
+                if (Application.OpenForms.OfType<Graphic_form>().Count() > 0)
+                    Form_plotter.inserir(Convert.ToDouble(RxString), "Field3");//manda para o gráfico os dados
             }
             else if (RxID == 4)
             {
                 display_Campo4.Text = RxString + " " + Properties.Settings.Default.campo4_un;//se o dado for uma temperatura, atualiza o campo correspondente
+                if (Application.OpenForms.OfType<Graphic_form>().Count() > 0)
+                    Form_plotter.inserir(Convert.ToDouble(RxString), "Field4");//manda para o gráfico os dados
             }
             else if (RxID == 0)
             {
                 display_Campo5.Text = RxString + " " + Properties.Settings.Default.campo5_un;//se o dado for uma temperatura, atualiza o campo correspondente
+                if (Application.OpenForms.OfType<Graphic_form>().Count() > 0)
+                    Form_plotter.inserir(Convert.ToDouble(RxString), "Field5");//manda para o gráfico os dados
             }
         }
 
