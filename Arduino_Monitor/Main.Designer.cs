@@ -56,6 +56,7 @@
             this.timerSaver = new System.Windows.Forms.Timer(this.components);
             this.timerLoad = new System.Windows.Forms.Timer(this.components);
             this.btn_Config = new System.Windows.Forms.Button();
+            this.bt_Plotter = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -152,6 +153,7 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.bt_Plotter);
             this.panel1.Controls.Add(this.btReset);
             this.panel1.Controls.Add(this.display_Campo5);
             this.panel1.Controls.Add(this.label_Campo5);
@@ -299,6 +301,17 @@
             this.btn_Config.UseVisualStyleBackColor = false;
             this.btn_Config.Click += new System.EventHandler(this.btn_Config_Click);
             // 
+            // bt_Plotter
+            // 
+            this.bt_Plotter.Enabled = false;
+            this.bt_Plotter.Location = new System.Drawing.Point(577, 177);
+            this.bt_Plotter.Name = "bt_Plotter";
+            this.bt_Plotter.Size = new System.Drawing.Size(75, 23);
+            this.bt_Plotter.TabIndex = 19;
+            this.bt_Plotter.Text = "Plotter";
+            this.bt_Plotter.UseVisualStyleBackColor = true;
+            this.bt_Plotter.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -334,7 +347,6 @@
         private System.Windows.Forms.Button btConectar;
         private System.Windows.Forms.ComboBox comboBoxPort;
         private System.Windows.Forms.Timer timerCOM;
-        private System.IO.Ports.SerialPort serialPort1;
         private System.Windows.Forms.ComboBox comboBoxBaud;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox cb_LiveScan;
@@ -357,6 +369,8 @@
         private System.Windows.Forms.Label display_Campo5;
         private System.Windows.Forms.Label label_Campo5;
         private System.Windows.Forms.Button btReset;
+        public System.IO.Ports.SerialPort serialPort1;
+        private System.Windows.Forms.Button bt_Plotter;
     }
 }
 

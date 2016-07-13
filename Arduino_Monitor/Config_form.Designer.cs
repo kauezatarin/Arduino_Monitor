@@ -465,12 +465,12 @@
         private System.Windows.Forms.TextBox tb_Parametro5;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox tb_Campo5_Un;
-        private System.Windows.Forms.TextBox tb_Campo5;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.CheckBox cb_Campo1;
         private System.Windows.Forms.CheckBox cb_Campo2;
         private System.Windows.Forms.CheckBox cb_Campo3;
         private System.Windows.Forms.CheckBox cb_Campo4;
         private System.Windows.Forms.CheckBox cb_Campo5;
+        private System.Windows.Forms.TextBox tb_Campo5;
     }
 }

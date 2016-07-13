@@ -19,6 +19,7 @@ namespace Arduino_Monitor
         string [] parametro = new string[5];
         int RxID = 0;
         Config_form Form_conf = null;//declara uma variavel para a janela de configurações
+        Graphic_form Form_plotter = null;
 
         public Main()//não modificar
         {
@@ -355,6 +356,7 @@ namespace Arduino_Monitor
                 {
                     btConectar.Text = "Desconectar";//muda o texto do botão conectar
                     btReset.Enabled = true;//ativa o botão de reset do dispositivo
+                    bt_Plotter.Enabled = true;//ativa o botão de grafico
 
                     btScan.Enabled = false;//desativa o botão scan
 
@@ -376,6 +378,7 @@ namespace Arduino_Monitor
                     comboBoxBaud.Enabled = true;//ativa o combobox baud rate
                     comboBoxTime.Enabled = true;//ativa o combobox refresh rate
                     btReset.Enabled = false;//desativa o botão de reset do dispositivo
+                    bt_Plotter.Enabled = false;//desativa o botão de grafico
 
                     timerDATA.Enabled = false;//desativa o timer de refresh dos dados
 
@@ -468,6 +471,9 @@ namespace Arduino_Monitor
             if (RxID == 1)
             {
                 display_Campo1.Text = RxString +" "+Properties.Settings.Default.campo1_un;//se o dado for uma temperatura, atualiza o campo correspondente
+
+                if (Application.OpenForms.OfType<Graphic_form>().Count() > 0)
+                    Form_plotter.inserir(Convert.ToDouble(RxString), "Field1");//manda para o gráfico os dados
             }
             else if (RxID == 2)
             {
@@ -509,6 +515,25 @@ namespace Arduino_Monitor
         private void timerLoad_Tick(object sender, EventArgs e)// a cada x milisegundos atualiza os labels
         {
             Load_labels();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms.OfType<Graphic_form>().Count() == 0)//verifica se ja existe uma aba aberta
+            {
+                Form_plotter = new Graphic_form();//instancia o formulario filho
+
+                //descobre a posição do form principal para centralizar o filho
+                int x = this.Left + (this.Width / 2) - (Form_plotter.Width / 2);
+                int y = this.Top + (this.Height / 2) - (Form_plotter.Height / 2);
+
+                Form_plotter.Location = new Point(x, y);//seta a posição do formulario filho
+                Form_plotter.Show();//exibe o formulario filho
+            }
+            else
+            {
+                Form_plotter.Focus();//caso a janela ja esteja aberta, foca na mesma
+            }
         }
     }
 }
