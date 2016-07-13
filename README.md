@@ -14,6 +14,7 @@ parameter settings, that allow the user to request the right data from the conne
 * Device connection lost detection
 * Send requests interval settings
 * Fields ON/OFF settings
+* Serial Plotter (Alpha)
 
 ####Future Features:
 
