@@ -24,3 +24,5 @@ parameter settings, that allow the user to request the right data from the conne
 * Things Speak integration
 * Manual input panel (to manually send commands to the device)
 * Improve interface organizarion with menu strip
+* Improve send requests interval settings (split the config in roud time and individual time for each field)
+* Improve configuration load and change process
