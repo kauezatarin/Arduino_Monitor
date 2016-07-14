@@ -2,7 +2,7 @@
 Arduino Monitor is a simple aplication that make's possible to easily read values from up to 5 sensors connected to an arduino compatible board
 using serial comunication.
 
-The application has a customisable field and unity system that aollows the user to set the appropriate name to them, also has a customizable
+The application has a customizable field and unity system that aollows the user to set the appropriate name to them, also has a customizable
 parameter settings, that allow the user to request the right data from the connected device.
 
 ####Implemented Features:
