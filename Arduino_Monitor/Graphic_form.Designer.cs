@@ -39,6 +39,11 @@
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.Title title5 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
@@ -49,18 +54,23 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chart1.BackColor = System.Drawing.Color.Gray;
+            chartArea1.AlignWithChartArea = "ChartArea2";
             chartArea1.AxisX.Title = "Intervalo";
             chartArea1.AxisY.Title = "Valores";
             chartArea1.Name = "ChartArea1";
+            chartArea2.AlignWithChartArea = "ChartArea3";
             chartArea2.AxisX.Title = "Intervalo";
             chartArea2.AxisY.Title = "Valores";
             chartArea2.Name = "ChartArea2";
+            chartArea3.AlignWithChartArea = "ChartArea1";
             chartArea3.AxisX.Title = "Intervalo";
             chartArea3.AxisY.Title = "Valores";
             chartArea3.Name = "ChartArea3";
+            chartArea4.AlignWithChartArea = "ChartArea5";
             chartArea4.AxisX.Title = "Intervalo";
             chartArea4.AxisY.Title = "Valores";
             chartArea4.Name = "ChartArea4";
+            chartArea5.AlignWithChartArea = "ChartArea4";
             chartArea5.AxisX.Title = "Intervalo";
             chartArea5.AxisY.Title = "Valores";
             chartArea5.Name = "ChartArea5";
@@ -123,6 +133,36 @@
             this.chart1.TabIndex = 20;
             this.chart1.TabStop = false;
             this.chart1.Text = "chart1";
+            title1.Alignment = System.Drawing.ContentAlignment.TopCenter;
+            title1.DockedToChartArea = "ChartArea1";
+            title1.DockingOffset = -4;
+            title1.Name = "Title1";
+            title1.Text = "Field 1";
+            title2.Alignment = System.Drawing.ContentAlignment.TopCenter;
+            title2.DockedToChartArea = "ChartArea2";
+            title2.DockingOffset = -4;
+            title2.Name = "Title2";
+            title2.Text = "Field 2";
+            title3.Alignment = System.Drawing.ContentAlignment.TopCenter;
+            title3.DockedToChartArea = "ChartArea3";
+            title3.DockingOffset = -4;
+            title3.Name = "Title3";
+            title3.Text = "Field 3";
+            title4.Alignment = System.Drawing.ContentAlignment.TopCenter;
+            title4.DockedToChartArea = "ChartArea4";
+            title4.DockingOffset = -4;
+            title4.Name = "Title4";
+            title4.Text = "Field 4";
+            title5.Alignment = System.Drawing.ContentAlignment.TopCenter;
+            title5.DockedToChartArea = "ChartArea5";
+            title5.DockingOffset = -4;
+            title5.Name = "Title5";
+            title5.Text = "Field 5";
+            this.chart1.Titles.Add(title1);
+            this.chart1.Titles.Add(title2);
+            this.chart1.Titles.Add(title3);
+            this.chart1.Titles.Add(title4);
+            this.chart1.Titles.Add(title5);
             // 
             // Graphic_form
             // 

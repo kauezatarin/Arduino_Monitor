@@ -466,38 +466,53 @@ namespace Arduino_Monitor
            this.Invoke(new EventHandler(trataDadoRecebido));   //chama outra thread para escrever o dado no text box
         }
 
-        private void trataDadoRecebido(object sender, EventArgs e)//printa o dado recebido do dispositivo no console
+        private void trataDadoRecebido(object sender, EventArgs e)//printa o dado recebido do dispositivo no console e envia para os gráficos
         {
             if (RxID == 1)
             {
                 display_Campo1.Text = RxString +" "+Properties.Settings.Default.campo1_un;//se o dado for uma temperatura, atualiza o campo correspondente
 
                 if (Application.OpenForms.OfType<Graphic_form>().Count() > 0)
+                {
+                    RxString = RxString.Replace(".",",");//subistitui . por , para numeros quebrados
                     Form_plotter.inserir(Convert.ToDouble(RxString), "Field1");//manda para o gráfico os dados
+                }                    
             }
             else if (RxID == 2)
             {
                 display_Campo2.Text = RxString +" "+ Properties.Settings.Default.campo2_un;//se o dado for uma temperatura, atualiza o campo correspondente
                 if (Application.OpenForms.OfType<Graphic_form>().Count() > 0)
+                {
+                    RxString = RxString.Replace(".", ",");//subistitui . por , para numeros quebrados
                     Form_plotter.inserir(Convert.ToDouble(RxString), "Field2");//manda para o gráfico os dados
+                }                    
             }
             else if (RxID == 3)
             {
                 display_Campo3.Text = RxString + " " + Properties.Settings.Default.campo3_un;//se o dado for uma temperatura, atualiza o campo correspondente
                 if (Application.OpenForms.OfType<Graphic_form>().Count() > 0)
+                {
+                    RxString = RxString.Replace(".", ",");//subistitui . por , para numeros quebrados
                     Form_plotter.inserir(Convert.ToDouble(RxString), "Field3");//manda para o gráfico os dados
+                }                    
             }
             else if (RxID == 4)
             {
                 display_Campo4.Text = RxString + " " + Properties.Settings.Default.campo4_un;//se o dado for uma temperatura, atualiza o campo correspondente
                 if (Application.OpenForms.OfType<Graphic_form>().Count() > 0)
+                {
+                    RxString = RxString.Replace(".", ",");//subistitui . por , para numeros quebrados
                     Form_plotter.inserir(Convert.ToDouble(RxString), "Field4");//manda para o gráfico os dados
+                }                    
             }
             else if (RxID == 0)
             {
                 display_Campo5.Text = RxString + " " + Properties.Settings.Default.campo5_un;//se o dado for uma temperatura, atualiza o campo correspondente
                 if (Application.OpenForms.OfType<Graphic_form>().Count() > 0)
+                {
+                    RxString = RxString.Replace(".", ",");//subistitui . por , para numeros quebrados
                     Form_plotter.inserir(Convert.ToDouble(RxString), "Field5");//manda para o gráfico os dados
+                }
             }
         }
 
