@@ -28,5 +28,4 @@ parameter settings, that allow the user to request the right data from the conne
 
 * Improve interface organizarion with menu strip
 * Improve send requests interval settings (split the config in roud time and individual time for each field)
-* Improve configuration load and change process
 * Improve configuration form interface
