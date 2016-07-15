@@ -20,7 +20,6 @@ parameter settings, that allow the user to request the right data from the conne
 
 * Log System
 * Save gathered data to a file
-* Double the number of sensors that can be monitored
 * Things Speak integration
 * Manual input panel (to manually send commands to the device)
 * Multi language support (the software currently is in Portuguese)
