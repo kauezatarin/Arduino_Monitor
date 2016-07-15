@@ -23,6 +23,7 @@ parameter settings, that allow the user to request the right data from the conne
 * Double the number of sensors that can be monitored
 * Things Speak integration
 * Manual input panel (to manually send commands to the device)
+* Translation to English (now the software is in Portuguese)
 
 ####Improvements/Issues:
 
