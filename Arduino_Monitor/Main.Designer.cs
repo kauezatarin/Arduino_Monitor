@@ -41,6 +41,7 @@
             this.label_Campo1 = new System.Windows.Forms.Label();
             this.display_Campo1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.bt_Plotter = new System.Windows.Forms.Button();
             this.btReset = new System.Windows.Forms.Button();
             this.display_Campo5 = new System.Windows.Forms.Label();
             this.label_Campo5 = new System.Windows.Forms.Label();
@@ -54,9 +55,7 @@
             this.comboBoxTime = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.timerSaver = new System.Windows.Forms.Timer(this.components);
-            this.timerLoad = new System.Windows.Forms.Timer(this.components);
             this.btn_Config = new System.Windows.Forms.Button();
-            this.bt_Plotter = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -170,6 +169,17 @@
             this.panel1.Size = new System.Drawing.Size(785, 207);
             this.panel1.TabIndex = 11;
             // 
+            // bt_Plotter
+            // 
+            this.bt_Plotter.Enabled = false;
+            this.bt_Plotter.Location = new System.Drawing.Point(577, 177);
+            this.bt_Plotter.Name = "bt_Plotter";
+            this.bt_Plotter.Size = new System.Drawing.Size(75, 23);
+            this.bt_Plotter.TabIndex = 19;
+            this.bt_Plotter.Text = "Plotter";
+            this.bt_Plotter.UseVisualStyleBackColor = true;
+            this.bt_Plotter.Click += new System.EventHandler(this.bt_Plotter_Click);
+            // 
             // btReset
             // 
             this.btReset.Enabled = false;
@@ -282,12 +292,6 @@
             this.timerSaver.Interval = 5000;
             this.timerSaver.Tick += new System.EventHandler(this.timerSaver_Tick);
             // 
-            // timerLoad
-            // 
-            this.timerLoad.Enabled = true;
-            this.timerLoad.Interval = 1000;
-            this.timerLoad.Tick += new System.EventHandler(this.timerLoad_Tick);
-            // 
             // btn_Config
             // 
             this.btn_Config.BackgroundImage = global::Arduino_Monitor.Properties.Resources.setings;
@@ -300,17 +304,6 @@
             this.btn_Config.TabIndex = 14;
             this.btn_Config.UseVisualStyleBackColor = false;
             this.btn_Config.Click += new System.EventHandler(this.btn_Config_Click);
-            // 
-            // bt_Plotter
-            // 
-            this.bt_Plotter.Enabled = false;
-            this.bt_Plotter.Location = new System.Drawing.Point(577, 177);
-            this.bt_Plotter.Name = "bt_Plotter";
-            this.bt_Plotter.Size = new System.Drawing.Size(75, 23);
-            this.bt_Plotter.TabIndex = 19;
-            this.bt_Plotter.Text = "Plotter";
-            this.bt_Plotter.UseVisualStyleBackColor = true;
-            this.bt_Plotter.Click += new System.EventHandler(this.button1_Click);
             // 
             // Main
             // 
@@ -360,7 +353,6 @@
         private System.Windows.Forms.ComboBox comboBoxTime;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Timer timerSaver;
-        public System.Windows.Forms.Timer timerLoad;
         private System.Windows.Forms.Button btn_Config;
         private System.Windows.Forms.Label display_Campo4;
         private System.Windows.Forms.Label label_Campo4;

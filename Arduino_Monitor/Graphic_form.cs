@@ -32,6 +32,5 @@ namespace Arduino_Monitor
              
             this.chart1.Series[field].Points.AddXY(rt, data);
         }
-
     }
 }

@@ -160,7 +160,7 @@ namespace Arduino_Monitor
 
         }
 
-        private void Load_labels()//carrega os textos dos labels e os parametros a serem enviados pela serial
+        public void Load_labels()//carrega os textos dos labels e os parametros a serem enviados pela serial
         {
             //carrega as labels caso eslas esteja ativadas
             label_Campo1.Text = Properties.Settings.Default.campo1+": ";
@@ -413,7 +413,7 @@ namespace Arduino_Monitor
         {
             if (Application.OpenForms.OfType<Config_form>().Count() == 0)//verifica se ja existe uma aba aberta
             {
-                Form_conf = new Config_form();//instancia o formulario filho
+                Form_conf = new Config_form(this);//instancia o formulario filho passando a instancia main para acesso
 
                 //descobre a posição do form principal para centralizar o filho
                 int x = this.Left + (this.Width / 2) - (Form_conf.Width / 2);
@@ -435,6 +435,25 @@ namespace Arduino_Monitor
                 serialPort1.DtrEnable = true;
                 Thread.Sleep(1000);
                 serialPort1.DtrEnable = false;
+            }
+        }
+
+        private void bt_Plotter_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms.OfType<Graphic_form>().Count() == 0)//verifica se ja existe uma aba aberta
+            {
+                Form_plotter = new Graphic_form();//instancia o formulario filho
+
+                //descobre a posição do form principal para centralizar o filho
+                int x = this.Left + (this.Width / 2) - (Form_plotter.Width / 2);
+                int y = this.Top + (this.Height / 2) - (Form_plotter.Height / 2);
+
+                Form_plotter.Location = new Point(x, y);//seta a posição do formulario filho
+                Form_plotter.Show();//exibe o formulario filho
+            }
+            else
+            {
+                Form_plotter.Focus();//caso a janela ja esteja aberta, foca na mesma
             }
         }
 
@@ -533,30 +552,6 @@ namespace Arduino_Monitor
         private void timerDATA_Tick(object sender, EventArgs e)//a cada x milisegundos atualiza os dados
         {
             data_Manager();
-        }
-
-        private void timerLoad_Tick(object sender, EventArgs e)// a cada x milisegundos atualiza os labels
-        {
-            Load_labels();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (Application.OpenForms.OfType<Graphic_form>().Count() == 0)//verifica se ja existe uma aba aberta
-            {
-                Form_plotter = new Graphic_form();//instancia o formulario filho
-
-                //descobre a posição do form principal para centralizar o filho
-                int x = this.Left + (this.Width / 2) - (Form_plotter.Width / 2);
-                int y = this.Top + (this.Height / 2) - (Form_plotter.Height / 2);
-
-                Form_plotter.Location = new Point(x, y);//seta a posição do formulario filho
-                Form_plotter.Show();//exibe o formulario filho
-            }
-            else
-            {
-                Form_plotter.Focus();//caso a janela ja esteja aberta, foca na mesma
-            }
         }
     }
 }

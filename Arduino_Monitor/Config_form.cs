@@ -12,9 +12,13 @@ namespace Arduino_Monitor
 {
     public partial class Config_form : Form
     {
-        public Config_form()
+        Main InstanciaMain;//instancia o main form para acesso de metodos
+
+        public Config_form(Main main)//recebe o endereço do main
         {
             InitializeComponent();
+
+            InstanciaMain = main;//permite o acesso as funcções do main
         }
 
         private void Config_form_Load(object sender, EventArgs e)
@@ -113,6 +117,9 @@ namespace Arduino_Monitor
             Properties.Settings.Default.campo5_un = tb_Campo5_Un.Text;
             Properties.Settings.Default.parametro5 = tb_Parametro5.Text;
             Properties.Settings.Default.ligado5 = cb_Campo5.Checked;
+
+            //carrega as novas configs no main
+            InstanciaMain.Load_labels();
         }
 
         private void btn_Cancel_Click(object sender, EventArgs e)//fecha o form
