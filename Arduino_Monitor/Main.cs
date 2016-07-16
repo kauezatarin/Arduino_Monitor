@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports; // necessário para ter acesso as portas
-using System.Threading;
+using System.Threading;//necessário para controle de threads e delay do sistema
 using System.Reflection;//necessário para pegar a versão do programa
 
 namespace Arduino_Monitor
