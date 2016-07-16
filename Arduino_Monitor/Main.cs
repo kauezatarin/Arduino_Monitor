@@ -356,6 +356,14 @@ namespace Arduino_Monitor
             return string.Format("[versão {0}]", Assembly.GetExecutingAssembly().GetName().Version);
         }
 
+        private void save_comboBox()//salva a configuração das combo boxes
+        {
+            Properties.Settings.Default.refresh_index = comboBoxTime.SelectedIndex;
+            Properties.Settings.Default.baud_index = comboBoxBaud.SelectedIndex;
+
+            Properties.Settings.Default.Save();//salva as configurações
+        }
+
         /*-------Botões---------------------*/
         private void btConectar_Click(object sender, EventArgs e)//botão de conectar
         {
@@ -384,6 +392,9 @@ namespace Arduino_Monitor
                     comboBoxPort.Enabled = false;//desativa o combobox COM port
                     comboBoxBaud.Enabled = false;//desativa o combobox baud rate
                     comboBoxTime.Enabled = false;//desativa o combobox refresh rate
+
+                    timerSaver.Enabled = false;//desativa o save das combo box ja que elas não podem ser modificadas
+                    save_comboBox();//garante que as ultimas configurações foram salvas
                     
                     timerDATA.Interval = Convert.ToInt32(comboBoxTime.Items[comboBoxTime.SelectedIndex]) * 1000;
                     timerDATA.Enabled = true;//ativa o timer de refresh dos dados
@@ -401,6 +412,8 @@ namespace Arduino_Monitor
                     tsm_Tools_Reboot.Enabled = false;//desativa o botão de reset do dispositivo
                     tsm_Tools_Plotter.Enabled = false;//desativa o botão de grafico
                     tsm_Tools_Console.Enabled = false;//desativa o botão do console
+
+                    timerSaver.Enabled = true;//ativa o save das combo box
 
                     timerDATA.Enabled = false;//desativa o timer de refresh dos dados
 
@@ -535,10 +548,7 @@ namespace Arduino_Monitor
         /*--------Timers--------------*/
         private void timerSaver_Tick(object sender, EventArgs e)//a cada x milisegundos salva as configuraçõesda interface principal
         {
-            Properties.Settings.Default.refresh_index = comboBoxTime.SelectedIndex;
-            Properties.Settings.Default.baud_index = comboBoxBaud.SelectedIndex;
-
-            Properties.Settings.Default.Save();//salva as configurações
+            save_comboBox();
         }
 
         private void timerCOM_Tick(object sender, EventArgs e)//a cada x milisegundos executa a função
