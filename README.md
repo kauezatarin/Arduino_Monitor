@@ -14,14 +14,14 @@ parameter settings, that allow the user to request the right data from the conne
 * Device connection lost detection
 * Send requests interval settings
 * Fields ON/OFF settings
-* Serial Plotter (Alpha)
+* Serial Plotter
+* Manual input panel (Console)
 
 ####Future Features:
 
 * Log System
 * Save gathered data to a file
 * Things Speak integration
-* Manual input panel (to manually send commands to the device)
 * Multi language support (the software currently is in Portuguese)
 
 ####Improvements/Issues:
