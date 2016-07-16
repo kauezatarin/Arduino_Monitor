@@ -130,17 +130,23 @@ namespace Arduino_Monitor
         public void enviarComandos(string str)//envia os comandos pela serial
         {           
             if (serialPort1.IsOpen == true)//porta está aberta
-            {
-                serialPort1.Write(str);  //envia o texto presente na variavel str
-                                
-                if (Application.OpenForms.OfType<Console_form>().Count() > 0)//se o console estiver aberto
+            {                                              
+                if (Application.OpenForms.OfType<Console_form>().Count() > 0)//se o console estiver aberto (envio manual)
                 {
-                    Form_console.tb_Receive.AppendText(Environment.NewLine + "Enviado: " + Form_console.tb_Send.Text);//printa no console
+                    if(Form_console.tb_Send.Text != "")//se o campo enviar não estiver vazio
+                    {
+                        Form_console.tb_Receive.AppendText(Environment.NewLine + "Enviado: " + Form_console.tb_Send.Text);//printa no console
+                        serialPort1.Write(str);  //envia o texto presente na variavel str
+                    }              
 
                     if (Properties.Settings.Default.clear_on_send == true)//verifica a opção clear on send do console
                     {
                         Form_console.tb_Send.Text = "";
                     }
+                }
+                else//envio automatico
+                {
+                    serialPort1.Write(str);  //envia o texto presente na variavel str
                 }
             }
             else
