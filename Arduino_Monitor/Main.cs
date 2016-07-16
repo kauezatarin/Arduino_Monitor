@@ -15,11 +15,11 @@ namespace Arduino_Monitor
 {
     public partial class Main : Form
     {
-        string RxString;
-        string [] parametro = new string[5];
-        int RxID = 0;
+        string RxString;//string recebia pela serial
+        string [] parametro = new string[5];//parametros a serem passados
+        int RxID = 0;//controlados de dados recebidos
         Config_form Form_conf = null;//declara uma variavel para a janela de configurações
-        Graphic_form Form_plotter = null;
+        Graphic_form Form_plotter = null;//declara uma variavel para a janela de gráficos
 
         public Main()//não modificar
         {
@@ -222,10 +222,6 @@ namespace Arduino_Monitor
             /*-----dica Scan-----*/
             System.Windows.Forms.ToolTip dicaScan = new System.Windows.Forms.ToolTip();
             dicaScan.SetToolTip(this.btScan, "Procurar por dispositivos");
-
-            /*-----dica Resete-----*/
-            System.Windows.Forms.ToolTip dicaReset = new System.Windows.Forms.ToolTip();
-            dicaReset.SetToolTip(this.btReset, "Reiniciar dispositivo");
         }
 
         private void data_Manager()//gerencia os pedidos de dados e os locais de impressão
@@ -305,7 +301,8 @@ namespace Arduino_Monitor
                 comboBoxPort.Enabled = true;//ativa o combobox COM port
                 comboBoxBaud.Enabled = true;//ativa o combobox baud rate
                 comboBoxTime.Enabled = true;//ativa o combobox refresh rate
-                btReset.Enabled = false;//desativa o botão de reset do dispositivo
+                tsm_Tools_Reboot.Enabled = false;//desativa o botão de reset do dispositivo
+                tsm_Tools_plotter.Enabled = false;//desativa o botão de reset de Plotter
 
                 timerDATA.Enabled = false;//desativa o timer de refresh dos dados
 
@@ -355,8 +352,8 @@ namespace Arduino_Monitor
                 if (serialPort1.IsOpen)
                 {
                     btConectar.Text = "Desconectar";//muda o texto do botão conectar
-                    btReset.Enabled = true;//ativa o botão de reset do dispositivo
-                    bt_Plotter.Enabled = true;//ativa o botão de grafico
+                    tsm_Tools_Reboot.Enabled = true;//ativa o botão de reset do dispositivo
+                    tsm_Tools_plotter.Enabled = true;//ativa o botão de grafico
 
                     btScan.Enabled = false;//desativa o botão scan
 
@@ -377,8 +374,8 @@ namespace Arduino_Monitor
                     comboBoxPort.Enabled = true;//ativa o combobox COM port
                     comboBoxBaud.Enabled = true;//ativa o combobox baud rate
                     comboBoxTime.Enabled = true;//ativa o combobox refresh rate
-                    btReset.Enabled = false;//desativa o botão de reset do dispositivo
-                    bt_Plotter.Enabled = false;//desativa o botão de grafico
+                    tsm_Tools_Reboot.Enabled = false;//desativa o botão de reset do dispositivo
+                    tsm_Tools_plotter.Enabled = false;//desativa o botão de grafico
 
                     timerDATA.Enabled = false;//desativa o timer de refresh dos dados
 
@@ -427,36 +424,7 @@ namespace Arduino_Monitor
                 Form_conf.Focus();//caso a janela ja esteja aberta, foca na mesma
             }
         }
-        
-        private void resetButton_Click(object sender, EventArgs e)//botão que reinicia o despositivo
-        {
-            if (MessageBox.Show("Tem certeza que deseja reiniciar o dispositivo?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                serialPort1.DtrEnable = true;
-                Thread.Sleep(1000);
-                serialPort1.DtrEnable = false;
-            }
-        }
-
-        private void bt_Plotter_Click(object sender, EventArgs e)
-        {
-            if (Application.OpenForms.OfType<Graphic_form>().Count() == 0)//verifica se ja existe uma aba aberta
-            {
-                Form_plotter = new Graphic_form();//instancia o formulario filho
-
-                //descobre a posição do form principal para centralizar o filho
-                int x = this.Left + (this.Width / 2) - (Form_plotter.Width / 2);
-                int y = this.Top + (this.Height / 2) - (Form_plotter.Height / 2);
-
-                Form_plotter.Location = new Point(x, y);//seta a posição do formulario filho
-                Form_plotter.Show();//exibe o formulario filho
-            }
-            else
-            {
-                Form_plotter.Focus();//caso a janela ja esteja aberta, foca na mesma
-            }
-        }
-
+                
         /*--------checkbox------------------*/
         private void checkBox1_CheckedChanged(object sender, EventArgs e)//live scan on/off
         {
@@ -552,6 +520,36 @@ namespace Arduino_Monitor
         private void timerDATA_Tick(object sender, EventArgs e)//a cada x milisegundos atualiza os dados
         {
             data_Manager();
+        }
+        
+        /*--------Menu Strip---------*/
+        private void plotterToolStripMenuItem_Click(object sender, EventArgs e)//abre o plotter
+        {
+            if (Application.OpenForms.OfType<Graphic_form>().Count() == 0)//verifica se ja existe uma aba aberta
+            {
+                Form_plotter = new Graphic_form();//instancia o formulario filho
+
+                //descobre a posição do form principal para centralizar o filho
+                int x = this.Left + (this.Width / 2) - (Form_plotter.Width / 2);
+                int y = this.Top + (this.Height / 2) - (Form_plotter.Height / 2);
+
+                Form_plotter.Location = new Point(x, y);//seta a posição do formulario filho
+                Form_plotter.Show();//exibe o formulario filho
+            }
+            else
+            {
+                Form_plotter.Focus();//caso a janela ja esteja aberta, foca na mesma
+            }
+        }
+
+        private void reiniciarDispositivoToolStripMenuItem_Click(object sender, EventArgs e)//botão que reinicia o despositivo
+        {
+            if (MessageBox.Show("Tem certeza que deseja reiniciar o dispositivo?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                serialPort1.DtrEnable = true;
+                Thread.Sleep(1000);
+                serialPort1.DtrEnable = false;
+            }
         }
     }
 }
