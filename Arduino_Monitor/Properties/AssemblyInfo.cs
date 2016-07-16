@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Comunicador Serial")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Arduino Monitor")]
+[assembly: AssemblyDescription("Arduino Monitor is a doftware developed to comunicate with arduino and other serial comunication devices with the objective to read sensors values.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Comunicador Serial")]
+[assembly: AssemblyProduct("Arduino Monitor")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.7.*")]
-[assembly: AssemblyFileVersion("1.7.2.0")]
+[assembly: AssemblyVersion("0.8.*")]
+[assembly: AssemblyFileVersion("0.8.0.0")]
