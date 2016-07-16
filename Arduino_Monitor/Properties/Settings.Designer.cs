@@ -298,5 +298,17 @@ namespace Arduino_Monitor.Properties {
                 this["ligado5"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool clear_on_send {
+            get {
+                return ((bool)(this["clear_on_send"]));
+            }
+            set {
+                this["clear_on_send"] = value;
+            }
+        }
     }
 }

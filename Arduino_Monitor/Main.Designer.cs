@@ -53,11 +53,12 @@
             this.comboBoxTime = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.timerSaver = new System.Windows.Forms.Timer(this.components);
-            this.btn_Config = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tsm_Tools = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsm_Tools_plotter = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsm_Tools_Plotter = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsm_Tools_Console = new System.Windows.Forms.ToolStripMenuItem();
             this.tsm_Tools_Reboot = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_Config = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -271,19 +272,6 @@
             this.timerSaver.Interval = 5000;
             this.timerSaver.Tick += new System.EventHandler(this.timerSaver_Tick);
             // 
-            // btn_Config
-            // 
-            this.btn_Config.BackgroundImage = global::Arduino_Monitor.Properties.Resources.setings;
-            this.btn_Config.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_Config.FlatAppearance.BorderSize = 0;
-            this.btn_Config.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Config.Location = new System.Drawing.Point(766, 26);
-            this.btn_Config.Name = "btn_Config";
-            this.btn_Config.Size = new System.Drawing.Size(32, 32);
-            this.btn_Config.TabIndex = 14;
-            this.btn_Config.UseVisualStyleBackColor = false;
-            this.btn_Config.Click += new System.EventHandler(this.btn_Config_Click);
-            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -298,19 +286,28 @@
             // tsm_Tools
             // 
             this.tsm_Tools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsm_Tools_plotter,
+            this.tsm_Tools_Plotter,
+            this.tsm_Tools_Console,
             this.tsm_Tools_Reboot});
             this.tsm_Tools.Name = "tsm_Tools";
             this.tsm_Tools.Size = new System.Drawing.Size(84, 20);
             this.tsm_Tools.Text = "Ferramentas";
             // 
-            // tsm_Tools_plotter
+            // tsm_Tools_Plotter
             // 
-            this.tsm_Tools_plotter.Enabled = false;
-            this.tsm_Tools_plotter.Name = "tsm_Tools_plotter";
-            this.tsm_Tools_plotter.Size = new System.Drawing.Size(180, 22);
-            this.tsm_Tools_plotter.Text = "Plotter";
-            this.tsm_Tools_plotter.Click += new System.EventHandler(this.plotterToolStripMenuItem_Click);
+            this.tsm_Tools_Plotter.Enabled = false;
+            this.tsm_Tools_Plotter.Name = "tsm_Tools_Plotter";
+            this.tsm_Tools_Plotter.Size = new System.Drawing.Size(180, 22);
+            this.tsm_Tools_Plotter.Text = "Plotter";
+            this.tsm_Tools_Plotter.Click += new System.EventHandler(this.tsm_Tools_Plotter_Click);
+            // 
+            // tsm_Tools_Console
+            // 
+            this.tsm_Tools_Console.Enabled = false;
+            this.tsm_Tools_Console.Name = "tsm_Tools_Console";
+            this.tsm_Tools_Console.Size = new System.Drawing.Size(180, 22);
+            this.tsm_Tools_Console.Text = "Console";
+            this.tsm_Tools_Console.Click += new System.EventHandler(this.tsm_Tools_Console_Click);
             // 
             // tsm_Tools_Reboot
             // 
@@ -318,7 +315,20 @@
             this.tsm_Tools_Reboot.Name = "tsm_Tools_Reboot";
             this.tsm_Tools_Reboot.Size = new System.Drawing.Size(180, 22);
             this.tsm_Tools_Reboot.Text = "Reiniciar Dispositivo";
-            this.tsm_Tools_Reboot.Click += new System.EventHandler(this.reiniciarDispositivoToolStripMenuItem_Click);
+            this.tsm_Tools_Reboot.Click += new System.EventHandler(this.tsm_Tools_Reboot_Click);
+            // 
+            // btn_Config
+            // 
+            this.btn_Config.BackgroundImage = global::Arduino_Monitor.Properties.Resources.setings;
+            this.btn_Config.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_Config.FlatAppearance.BorderSize = 0;
+            this.btn_Config.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Config.Location = new System.Drawing.Point(766, 26);
+            this.btn_Config.Name = "btn_Config";
+            this.btn_Config.Size = new System.Drawing.Size(32, 32);
+            this.btn_Config.TabIndex = 14;
+            this.btn_Config.UseVisualStyleBackColor = false;
+            this.btn_Config.Click += new System.EventHandler(this.btn_Config_Click);
             // 
             // Main
             // 
@@ -366,7 +376,6 @@
         private System.Windows.Forms.Label label_Campo1;
         private System.Windows.Forms.Label display_Campo1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Timer timerDATA;
         private System.Windows.Forms.Label display_Campo2;
         private System.Windows.Forms.Label label_Campo2;
         private System.Windows.Forms.ComboBox comboBoxTime;
@@ -382,8 +391,10 @@
         public System.IO.Ports.SerialPort serialPort1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem tsm_Tools;
-        private System.Windows.Forms.ToolStripMenuItem tsm_Tools_plotter;
+        private System.Windows.Forms.ToolStripMenuItem tsm_Tools_Plotter;
         private System.Windows.Forms.ToolStripMenuItem tsm_Tools_Reboot;
+        private System.Windows.Forms.ToolStripMenuItem tsm_Tools_Console;
+        public System.Windows.Forms.Timer timerDATA;
     }
 }
 

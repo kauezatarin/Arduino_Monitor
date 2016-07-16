@@ -90,6 +90,12 @@
     <Compile Include="Config_form.Designer.cs">
       <DependentUpon>Config_form.cs</DependentUpon>
     </Compile>
+    <Compile Include="Console_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Console_form.Designer.cs">
+      <DependentUpon>Console_form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Graphic_form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +112,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Config_form.resx">
       <DependentUpon>Config_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Console_form.resx">
+      <DependentUpon>Console_form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Graphic_form.resx">
       <DependentUpon>Graphic_form.cs</DependentUpon>
@@ -155,6 +164,7 @@
     <None Include="Resources\settings.png" />
     <None Include="Resources\settings.ico" />
     <None Include="Resources\setings.ico" />
+    <None Include="Resources\clear1.ico" />
     <Content Include="serial_k3v_1.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

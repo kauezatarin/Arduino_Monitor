@@ -20,6 +20,7 @@ namespace Arduino_Monitor
         int RxID = 0;//controlados de dados recebidos
         Config_form Form_conf = null;//declara uma variavel para a janela de configurações
         Graphic_form Form_plotter = null;//declara uma variavel para a janela de gráficos
+        Console_form Form_console = null;////declara uma variavel para a janela de console
 
         public Main()//não modificar
         {
@@ -126,11 +127,21 @@ namespace Arduino_Monitor
 
         }
 
-        private void enviarComandos(string str)//envia os comandos pela serial
-        {
-            if (serialPort1.IsOpen == true)          //porta está aberta
+        public void enviarComandos(string str)//envia os comandos pela serial
+        {           
+            if (serialPort1.IsOpen == true)//porta está aberta
             {
-              serialPort1.Write(str);  //envia o texto presente na variavel str
+                serialPort1.Write(str);  //envia o texto presente na variavel str
+                                
+                if (Application.OpenForms.OfType<Console_form>().Count() > 0)//se o console estiver aberto
+                {
+                    Form_console.tb_Receive.AppendText(Environment.NewLine + "Enviado: " + Form_console.tb_Send.Text);//printa no console
+
+                    if (Properties.Settings.Default.clear_on_send == true)//verifica a opção clear on send do console
+                    {
+                        Form_console.tb_Send.Text = "";
+                    }
+                }
             }
             else
             {
@@ -298,11 +309,17 @@ namespace Arduino_Monitor
             try
             {
                 serialPort1.Close();
+
                 comboBoxPort.Enabled = true;//ativa o combobox COM port
                 comboBoxBaud.Enabled = true;//ativa o combobox baud rate
                 comboBoxTime.Enabled = true;//ativa o combobox refresh rate
+
                 tsm_Tools_Reboot.Enabled = false;//desativa o botão de reset do dispositivo
-                tsm_Tools_plotter.Enabled = false;//desativa o botão de reset de Plotter
+                tsm_Tools_Plotter.Enabled = false;//desativa o botão de reset de Plotter
+                tsm_Tools_Console.Enabled = false;//desativa o botão do console
+
+                if (Application.OpenForms.OfType<Console_form>().Count() > 0)//se o console estiver aberto
+                    Form_console.Close();//fecha o console
 
                 timerDATA.Enabled = false;//desativa o timer de refresh dos dados
 
@@ -353,7 +370,8 @@ namespace Arduino_Monitor
                 {
                     btConectar.Text = "Desconectar";//muda o texto do botão conectar
                     tsm_Tools_Reboot.Enabled = true;//ativa o botão de reset do dispositivo
-                    tsm_Tools_plotter.Enabled = true;//ativa o botão de grafico
+                    tsm_Tools_Plotter.Enabled = true;//ativa o botão do grafico
+                    tsm_Tools_Console.Enabled = true;//ativa o botão do console
 
                     btScan.Enabled = false;//desativa o botão scan
 
@@ -375,7 +393,8 @@ namespace Arduino_Monitor
                     comboBoxBaud.Enabled = true;//ativa o combobox baud rate
                     comboBoxTime.Enabled = true;//ativa o combobox refresh rate
                     tsm_Tools_Reboot.Enabled = false;//desativa o botão de reset do dispositivo
-                    tsm_Tools_plotter.Enabled = false;//desativa o botão de grafico
+                    tsm_Tools_Plotter.Enabled = false;//desativa o botão de grafico
+                    tsm_Tools_Console.Enabled = false;//desativa o botão do console
 
                     timerDATA.Enabled = false;//desativa o timer de refresh dos dados
 
@@ -455,7 +474,11 @@ namespace Arduino_Monitor
 
         private void trataDadoRecebido(object sender, EventArgs e)//printa o dado recebido do dispositivo no console e envia para os gráficos
         {
-            if (RxID == 1)
+            if(Application.OpenForms.OfType<Console_form>().Count() > 0)//se o console estiver aberto, printa os dados recebidos nele
+            {
+                Form_console.tb_Receive.AppendText(Environment.NewLine + RxString);
+            }
+            else if (RxID == 1)
             {
                 display_Campo1.Text = RxString +" "+Properties.Settings.Default.campo1_un;//se o dado for uma temperatura, atualiza o campo correspondente
 
@@ -523,7 +546,7 @@ namespace Arduino_Monitor
         }
         
         /*--------Menu Strip---------*/
-        private void plotterToolStripMenuItem_Click(object sender, EventArgs e)//abre o plotter
+        private void tsm_Tools_Plotter_Click(object sender, EventArgs e)//abre o plotter
         {
             if (Application.OpenForms.OfType<Graphic_form>().Count() == 0)//verifica se ja existe uma aba aberta
             {
@@ -542,13 +565,34 @@ namespace Arduino_Monitor
             }
         }
 
-        private void reiniciarDispositivoToolStripMenuItem_Click(object sender, EventArgs e)//botão que reinicia o despositivo
+        private void tsm_Tools_Reboot_Click(object sender, EventArgs e)//botão que reinicia o despositivo
         {
             if (MessageBox.Show("Tem certeza que deseja reiniciar o dispositivo?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 serialPort1.DtrEnable = true;
                 Thread.Sleep(1000);
                 serialPort1.DtrEnable = false;
+            }
+        }
+
+        private void tsm_Tools_Console_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms.OfType<Console_form>().Count() == 0)//verifica se ja existe uma aba aberta
+            {
+                Form_console = new Console_form(this);//instancia o formulario filho
+
+                //descobre a posição do form principal para centralizar o filho
+                int x = this.Left + (this.Width / 2) - (Form_console.Width / 2);
+                int y = this.Top + (this.Height / 2) - (Form_console.Height / 2);
+
+                Form_console.Location = new Point(x, y);//seta a posição do formulario filho
+                Form_console.Show();//exibe o formulario filho
+
+                timerDATA.Enabled = false; //desabilita o envio automatico de comandos
+            }
+            else
+            {
+                Form_console.Focus();//caso a janela ja esteja aberta, foca na mesma
             }
         }
     }
