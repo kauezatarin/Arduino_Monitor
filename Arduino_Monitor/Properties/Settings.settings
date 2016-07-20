@@ -18,10 +18,10 @@
       <Value Profile="(Default)">Campo 2</Value>
     </Setting>
     <Setting Name="campo1_un" Type="System.String" Scope="User">
-      <Value Profile="(Default)">-</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="campo2_un" Type="System.String" Scope="User">
-      <Value Profile="(Default)">-</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="parametro1" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -36,10 +36,10 @@
       <Value Profile="(Default)">Campo 4</Value>
     </Setting>
     <Setting Name="campo3_un" Type="System.String" Scope="User">
-      <Value Profile="(Default)">-</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="campo4_un" Type="System.String" Scope="User">
-      <Value Profile="(Default)">-</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="parametro3" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -51,7 +51,7 @@
       <Value Profile="(Default)">Campo 5</Value>
     </Setting>
     <Setting Name="campo5_un" Type="System.String" Scope="User">
-      <Value Profile="(Default)">-</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="parametro5" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -72,6 +72,12 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="clear_on_send" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="thingspeak_API_key" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ligado_thingspeak" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>

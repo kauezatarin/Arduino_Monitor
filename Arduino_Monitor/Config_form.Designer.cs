@@ -66,11 +66,15 @@
             this.cb_Campo3 = new System.Windows.Forms.CheckBox();
             this.cb_Campo4 = new System.Windows.Forms.CheckBox();
             this.cb_Campo5 = new System.Windows.Forms.CheckBox();
+            this.label_thinkspeak = new System.Windows.Forms.Label();
+            this.tb_APIkey = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.cb_ThingSpeak = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btn_Aplly
             // 
-            this.btn_Aplly.Location = new System.Drawing.Point(243, 226);
+            this.btn_Aplly.Location = new System.Drawing.Point(243, 232);
             this.btn_Aplly.Name = "btn_Aplly";
             this.btn_Aplly.Size = new System.Drawing.Size(75, 23);
             this.btn_Aplly.TabIndex = 1;
@@ -80,7 +84,7 @@
             // 
             // btn_Cancel
             // 
-            this.btn_Cancel.Location = new System.Drawing.Point(131, 226);
+            this.btn_Cancel.Location = new System.Drawing.Point(131, 232);
             this.btn_Cancel.Name = "btn_Cancel";
             this.btn_Cancel.Size = new System.Drawing.Size(75, 23);
             this.btn_Cancel.TabIndex = 0;
@@ -378,11 +382,50 @@
             this.cb_Campo5.Text = "ON";
             this.cb_Campo5.UseVisualStyleBackColor = true;
             // 
+            // label_thinkspeak
+            // 
+            this.label_thinkspeak.AutoSize = true;
+            this.label_thinkspeak.Location = new System.Drawing.Point(13, 163);
+            this.label_thinkspeak.Name = "label_thinkspeak";
+            this.label_thinkspeak.Size = new System.Drawing.Size(106, 13);
+            this.label_thinkspeak.TabIndex = 37;
+            this.label_thinkspeak.Text = "ThingSpeak Configs:";
+            // 
+            // tb_APIkey
+            // 
+            this.tb_APIkey.Location = new System.Drawing.Point(72, 189);
+            this.tb_APIkey.Name = "tb_APIkey";
+            this.tb_APIkey.Size = new System.Drawing.Size(100, 20);
+            this.tb_APIkey.TabIndex = 38;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(17, 192);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(48, 13);
+            this.label12.TabIndex = 39;
+            this.label12.Text = "API Key:";
+            // 
+            // cb_ThingSpeak
+            // 
+            this.cb_ThingSpeak.AutoSize = true;
+            this.cb_ThingSpeak.Location = new System.Drawing.Point(185, 191);
+            this.cb_ThingSpeak.Name = "cb_ThingSpeak";
+            this.cb_ThingSpeak.Size = new System.Drawing.Size(42, 17);
+            this.cb_ThingSpeak.TabIndex = 40;
+            this.cb_ThingSpeak.Text = "ON";
+            this.cb_ThingSpeak.UseVisualStyleBackColor = true;
+            // 
             // Config_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(489, 261);
+            this.ClientSize = new System.Drawing.Size(489, 266);
+            this.Controls.Add(this.cb_ThingSpeak);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.tb_APIkey);
+            this.Controls.Add(this.label_thinkspeak);
             this.Controls.Add(this.cb_Campo5);
             this.Controls.Add(this.cb_Campo4);
             this.Controls.Add(this.cb_Campo3);
@@ -472,5 +515,9 @@
         private System.Windows.Forms.CheckBox cb_Campo4;
         private System.Windows.Forms.CheckBox cb_Campo5;
         private System.Windows.Forms.TextBox tb_Campo5;
+        private System.Windows.Forms.Label label_thinkspeak;
+        private System.Windows.Forms.TextBox tb_APIkey;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.CheckBox cb_ThingSpeak;
     }
 }

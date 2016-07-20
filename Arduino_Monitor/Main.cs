@@ -17,6 +17,10 @@ namespace Arduino_Monitor
     {
         string RxString;//string recebia pela serial
         string [] parametro = new string[5];//parametros a serem passados
+        string[] unidade = new string[5];//unidade de medida dos campos
+        bool[] isOn = new bool[6];//armazena quais campos estão ou não ligados
+        bool canUpdateThingspeak = true;//autoriza ou não o thingspeak a atualizar (para controlar o tempo de update)
+        string API_key;//API Key ThingSpeak
         int RxID = 0;//controlados de dados recebidos
         Config_form Form_conf = null;//declara uma variavel para a janela de configurações
         Graphic_form Form_plotter = null;//declara uma variavel para a janela de gráficos
@@ -177,6 +181,25 @@ namespace Arduino_Monitor
 
         }
 
+        private void verify_Displays()//verifica os displays que estão ligados
+        {
+            //desativa os displays
+            if (isOn[0] == false)
+                display_Campo1.Text = "Off";
+
+            if (isOn[1] == false)
+                display_Campo2.Text = "Off";
+
+            if (isOn[2] == false)
+                display_Campo3.Text = "Off";
+
+            if (isOn[3] == false)
+                display_Campo4.Text = "Off";
+
+            if (isOn[4] == false)
+                display_Campo5.Text = "Off";
+        }
+
         public void Load_labels()//carrega os textos dos labels e os parametros a serem enviados pela serial
         {
             //carrega as labels caso eslas esteja ativadas
@@ -193,21 +216,27 @@ namespace Arduino_Monitor
             parametro[3] = Properties.Settings.Default.parametro4;
             parametro[4] = Properties.Settings.Default.parametro5;
 
-            //desativa os displays
-            if (Properties.Settings.Default.ligado1 == false)
-                display_Campo1.Text = "Off";
+            //carrega as unidades de medida de cada campo
+            unidade[0] = Properties.Settings.Default.campo1_un;
+            unidade[1] = Properties.Settings.Default.campo2_un;
+            unidade[2] = Properties.Settings.Default.campo3_un;
+            unidade[3] = Properties.Settings.Default.campo4_un;
+            unidade[4] = Properties.Settings.Default.campo5_un;
 
-            if (Properties.Settings.Default.ligado2 == false)
-                display_Campo2.Text = "Off";
+            //carrega os campos que estão ligados
+            isOn[0] = Properties.Settings.Default.ligado1;
+            isOn[1] = Properties.Settings.Default.ligado2;
+            isOn[2] = Properties.Settings.Default.ligado3;
+            isOn[3] = Properties.Settings.Default.ligado4;
+            isOn[4] = Properties.Settings.Default.ligado5;
+            isOn[5] = Properties.Settings.Default.ligado_thingspeak;
 
-            if (Properties.Settings.Default.ligado3 == false)
-                display_Campo3.Text = "Off";
 
-            if (Properties.Settings.Default.ligado4 == false)
-                display_Campo4.Text = "Off";
+            //carrega as configurações do ThingSpeak
+            API_key = Properties.Settings.Default.thingspeak_API_key;
 
-            if (Properties.Settings.Default.ligado5 == false)
-                display_Campo5.Text = "Off";
+            //verifica quais displays estão desligados
+            verify_Displays();
         }
 
         private void dicas()//exibe as caixas de dicas
@@ -241,11 +270,11 @@ namespace Arduino_Monitor
             dicaScan.SetToolTip(this.btScan, "Procurar por dispositivos");
         }
 
-        private void data_Manager()//gerencia os pedidos de dados e os locais de impressão
+        private void data_Manager()//gerencia os pedidos de dados e os locais de impressão e atualiza o thigspeak ao final
         {
             if (RxID == 0)
             {
-                if (Properties.Settings.Default.ligado1 == true)
+                if (isOn[0] == true)
                 {
                     enviarComandos(parametro[0]);//solicita o update dos dados ao arduino para o campo 1
                     RxID = 1;
@@ -259,7 +288,7 @@ namespace Arduino_Monitor
             }
             else if (RxID == 1)
             {
-                if (Properties.Settings.Default.ligado2 == true)
+                if (isOn[1] == true)
                 {
                     enviarComandos(parametro[1]);//solicita o update dos dados ao arduino para o campo 2
                     RxID = 2;
@@ -272,7 +301,7 @@ namespace Arduino_Monitor
             }
             else if (RxID == 2)
             {
-                if (Properties.Settings.Default.ligado3 == true)
+                if (isOn[2] == true)
                 {
                     enviarComandos(parametro[2]);//solicita o update dos dados ao arduino para o campo 3
                     RxID = 3;
@@ -285,7 +314,7 @@ namespace Arduino_Monitor
             }
             else if (RxID == 3)
             {
-                if (Properties.Settings.Default.ligado4 == true)
+                if (isOn[3] == true)
                 {
                     enviarComandos(parametro[3]);//solicita o update dos dados ao arduino para o campo 4
                     RxID = 4;
@@ -298,7 +327,7 @@ namespace Arduino_Monitor
             }
             else if (RxID == 4)
             {
-                if (Properties.Settings.Default.ligado5 == true)
+                if (isOn[4] == true)
                 {
                     enviarComandos(parametro[4]);//solicita o update dos dados ao arduino para o campo 5
                     RxID = 0;
@@ -306,6 +335,16 @@ namespace Arduino_Monitor
                 else
                 {
                     RxID = 0;
+                }
+
+                if(isOn[5] == true)//atualiza o thingspkeak
+                {
+                    if(canUpdateThingspeak == true)
+                    {
+                        Update_ThingSpeak(display_Campo1.Text, display_Campo2.Text, display_Campo3.Text, display_Campo4.Text, display_Campo5.Text);
+                    }
+
+                    verify_Displays();//verifica quais displays estão desligados                    
                 }
             }
         }
@@ -362,6 +401,40 @@ namespace Arduino_Monitor
             Properties.Settings.Default.baud_index = comboBoxBaud.SelectedIndex;
 
             Properties.Settings.Default.Save();//salva as configurações
+        }
+
+        private void Update_ThingSpeak(string dado1, string dado2, string dado3, string dado4, string dado5)//atualiza os dados no thingspeak
+        {
+            string novaURL;
+
+            novaURL = "https://api.thingspeak.com/update?api_key=" + API_key;
+
+            //verifica os campos ligados e adicona-os aos parametros
+            if(isOn[0] == true)
+            {
+                novaURL+="&field1=" + dado1;
+            }
+            if (isOn[1] == true)
+            {
+                novaURL +="&field2=" + dado2;
+            }
+            if (isOn[2] == true)
+            {
+                novaURL+= "&field3=" + dado3;
+            }
+            if (isOn[3] == true)
+            {
+                novaURL+= "&field4=" + dado4;
+            }
+            if (isOn[4] == true)
+            {
+                novaURL+="&field5=" + dado5;
+            }
+
+            wb_Thingspeak.Navigate(new Uri(novaURL));
+
+            canUpdateThingspeak = false;//retira a autorização para o proximo update
+            timerThingspeak.Enabled = true;//ativa a contagem para autorizar o proximo update
         }
 
         /*-------Botões---------------------*/
@@ -499,7 +572,7 @@ namespace Arduino_Monitor
             }
             else if (RxID == 1)
             {
-                display_Campo1.Text = RxString +" "+Properties.Settings.Default.campo1_un;//se o dado for uma temperatura, atualiza o campo correspondente
+                display_Campo1.Text = RxString +" "+ unidade[0];//se o dado for uma temperatura, atualiza o campo correspondente
 
                 if (Application.OpenForms.OfType<Graphic_form>().Count() > 0)
                 {
@@ -509,7 +582,8 @@ namespace Arduino_Monitor
             }
             else if (RxID == 2)
             {
-                display_Campo2.Text = RxString +" "+ Properties.Settings.Default.campo2_un;//se o dado for uma temperatura, atualiza o campo correspondente
+                display_Campo2.Text = RxString +" "+ unidade[1];//se o dado for uma temperatura, atualiza o campo correspondente
+
                 if (Application.OpenForms.OfType<Graphic_form>().Count() > 0)
                 {
                     RxString = RxString.Replace(".", ",");//subistitui . por , para numeros quebrados
@@ -518,7 +592,7 @@ namespace Arduino_Monitor
             }
             else if (RxID == 3)
             {
-                display_Campo3.Text = RxString + " " + Properties.Settings.Default.campo3_un;//se o dado for uma temperatura, atualiza o campo correspondente
+                display_Campo3.Text = RxString + " " + unidade[2];//se o dado for uma temperatura, atualiza o campo correspondente
                 if (Application.OpenForms.OfType<Graphic_form>().Count() > 0)
                 {
                     RxString = RxString.Replace(".", ",");//subistitui . por , para numeros quebrados
@@ -527,7 +601,7 @@ namespace Arduino_Monitor
             }
             else if (RxID == 4)
             {
-                display_Campo4.Text = RxString + " " + Properties.Settings.Default.campo4_un;//se o dado for uma temperatura, atualiza o campo correspondente
+                display_Campo4.Text = RxString + " " + unidade[3];//se o dado for uma temperatura, atualiza o campo correspondente
                 if (Application.OpenForms.OfType<Graphic_form>().Count() > 0)
                 {
                     RxString = RxString.Replace(".", ",");//subistitui . por , para numeros quebrados
@@ -536,7 +610,7 @@ namespace Arduino_Monitor
             }
             else if (RxID == 0)
             {
-                display_Campo5.Text = RxString + " " + Properties.Settings.Default.campo5_un;//se o dado for uma temperatura, atualiza o campo correspondente
+                display_Campo5.Text = RxString + " " + unidade[4];//se o dado for uma temperatura, atualiza o campo correspondente
                 if (Application.OpenForms.OfType<Graphic_form>().Count() > 0)
                 {
                     RxString = RxString.Replace(".", ",");//subistitui . por , para numeros quebrados
@@ -560,7 +634,13 @@ namespace Arduino_Monitor
         {
             data_Manager();
         }
-        
+
+        private void timerThingspeak_Tick(object sender, EventArgs e)//a cada 15 segundos autoriaza o update do thingspeak
+        {
+            canUpdateThingspeak = true;//permite o update do thingspeak
+            timerThingspeak.Enabled = false;//desativa o timer
+        }
+
         /*--------Menu Strip---------*/
         private void tsm_Tools_Plotter_Click(object sender, EventArgs e)//abre o plotter
         {

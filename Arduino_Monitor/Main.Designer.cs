@@ -59,6 +59,8 @@
             this.tsm_Tools_Console = new System.Windows.Forms.ToolStripMenuItem();
             this.tsm_Tools_Reboot = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Config = new System.Windows.Forms.Button();
+            this.wb_Thingspeak = new System.Windows.Forms.WebBrowser();
+            this.timerThingspeak = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -156,6 +158,7 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.wb_Thingspeak);
             this.panel1.Controls.Add(this.display_Campo5);
             this.panel1.Controls.Add(this.label_Campo5);
             this.panel1.Controls.Add(this.display_Campo4);
@@ -330,6 +333,24 @@
             this.btn_Config.UseVisualStyleBackColor = false;
             this.btn_Config.Click += new System.EventHandler(this.btn_Config_Click);
             // 
+            // wb_Thingspeak
+            // 
+            this.wb_Thingspeak.IsWebBrowserContextMenuEnabled = false;
+            this.wb_Thingspeak.Location = new System.Drawing.Point(790, 210);
+            this.wb_Thingspeak.Name = "wb_Thingspeak";
+            this.wb_Thingspeak.ScriptErrorsSuppressed = true;
+            this.wb_Thingspeak.ScrollBarsEnabled = false;
+            this.wb_Thingspeak.Size = new System.Drawing.Size(0, 0);
+            this.wb_Thingspeak.TabIndex = 16;
+            this.wb_Thingspeak.TabStop = false;
+            this.wb_Thingspeak.Url = new System.Uri("", System.UriKind.Relative);
+            this.wb_Thingspeak.WebBrowserShortcutsEnabled = false;
+            // 
+            // timerThingspeak
+            // 
+            this.timerThingspeak.Interval = 15000;
+            this.timerThingspeak.Tick += new System.EventHandler(this.timerThingspeak_Tick);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -395,6 +416,8 @@
         private System.Windows.Forms.ToolStripMenuItem tsm_Tools_Reboot;
         private System.Windows.Forms.ToolStripMenuItem tsm_Tools_Console;
         public System.Windows.Forms.Timer timerDATA;
+        private System.Windows.Forms.WebBrowser wb_Thingspeak;
+        private System.Windows.Forms.Timer timerThingspeak;
     }
 }
 

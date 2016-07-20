@@ -48,6 +48,9 @@ namespace Arduino_Monitor
             tb_Campo5_Un.Text = Properties.Settings.Default.campo5_un;
             tb_Parametro5.Text = Properties.Settings.Default.parametro5;
 
+            //carrega o campo API Key
+            tb_APIkey.Text = Properties.Settings.Default.thingspeak_API_key;
+
             load_Check_Configs();//carrega as configs das checkbox
         }
 
@@ -83,11 +86,17 @@ namespace Arduino_Monitor
             {
                 cb_Campo5.Checked = true;
             }
+
+            //le a configuração check box ThingSpeak
+            if (Properties.Settings.Default.ligado_thingspeak == true)
+            {
+                cb_ThingSpeak.Checked = true;
+            }
         }
 
         /*-------Botões---------------------*/
         private void btn_Aplly_Click(object sender, EventArgs e)//botão de aplicar as configurações
-        {
+        {            
             //salva o campo 1
             Properties.Settings.Default.campo1 = tb_Campo1.Text;
             Properties.Settings.Default.campo1_un = tb_Campo1_Un.Text;
@@ -117,6 +126,10 @@ namespace Arduino_Monitor
             Properties.Settings.Default.campo5_un = tb_Campo5_Un.Text;
             Properties.Settings.Default.parametro5 = tb_Parametro5.Text;
             Properties.Settings.Default.ligado5 = cb_Campo5.Checked;
+
+            //Salva ThingSpeak congis
+            Properties.Settings.Default.thingspeak_API_key = tb_APIkey.Text;
+            Properties.Settings.Default.ligado_thingspeak = cb_ThingSpeak.Checked;
 
             //carrega as novas configs no main
             InstanciaMain.Load_labels();

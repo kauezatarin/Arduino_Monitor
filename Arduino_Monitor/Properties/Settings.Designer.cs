@@ -85,7 +85,7 @@ namespace Arduino_Monitor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string campo1_un {
             get {
                 return ((string)(this["campo1_un"]));
@@ -97,7 +97,7 @@ namespace Arduino_Monitor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string campo2_un {
             get {
                 return ((string)(this["campo2_un"]));
@@ -157,7 +157,7 @@ namespace Arduino_Monitor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string campo3_un {
             get {
                 return ((string)(this["campo3_un"]));
@@ -169,7 +169,7 @@ namespace Arduino_Monitor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string campo4_un {
             get {
                 return ((string)(this["campo4_un"]));
@@ -217,7 +217,7 @@ namespace Arduino_Monitor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string campo5_un {
             get {
                 return ((string)(this["campo5_un"]));
@@ -308,6 +308,30 @@ namespace Arduino_Monitor.Properties {
             }
             set {
                 this["clear_on_send"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string thingspeak_API_key {
+            get {
+                return ((string)(this["thingspeak_API_key"]));
+            }
+            set {
+                this["thingspeak_API_key"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ligado_thingspeak {
+            get {
+                return ((bool)(this["ligado_thingspeak"]));
+            }
+            set {
+                this["ligado_thingspeak"] = value;
             }
         }
     }
