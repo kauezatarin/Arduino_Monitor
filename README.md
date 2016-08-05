@@ -27,6 +27,6 @@ parameter settings, that allow the user to request the right data from the conne
 ####Improvements/Issues:
 
 * ~~Improve interface organizarion with menu strip~~(completed)
-* Improve the plotter form labels to correspond with field names on main form
+* ~~Improve the plotter form labels to correspond with field names on main form
 * Improve send requests interval settings (split the config in roud time and individual time for each field)
 * Improve configuration form interface
