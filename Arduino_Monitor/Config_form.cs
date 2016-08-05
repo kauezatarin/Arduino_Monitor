@@ -13,12 +13,14 @@ namespace Arduino_Monitor
     public partial class Config_form : Form
     {
         Main InstanciaMain;//instancia o main form para acesso de metodos
+        Graphic_form InstanciaPlotter;
 
-        public Config_form(Main main)//recebe o endereço do main
+        public Config_form(Main main, Graphic_form plotter)//recebe o endereço do main e do plotter
         {
             InitializeComponent();
 
             InstanciaMain = main;//permite o acesso as funcções do main
+            InstanciaPlotter = plotter;
         }
 
         private void Config_form_Load(object sender, EventArgs e)
@@ -133,6 +135,10 @@ namespace Arduino_Monitor
 
             //carrega as novas configs no main
             InstanciaMain.Load_labels();
+
+            //carrega as novas configs no plotter se ele estiver aberto
+            if (InstanciaPlotter != null)
+                InstanciaPlotter.config_Load();
         }
 
         private void btn_Cancel_Click(object sender, EventArgs e)//fecha o form

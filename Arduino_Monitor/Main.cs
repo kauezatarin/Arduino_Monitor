@@ -521,7 +521,7 @@ namespace Arduino_Monitor
         {
             if (Application.OpenForms.OfType<Config_form>().Count() == 0)//verifica se ja existe uma aba aberta
             {
-                Form_conf = new Config_form(this);//instancia o formulario filho passando a instancia main para acesso
+                Form_conf = new Config_form(this, Form_plotter);//instancia o formulario filho passando a instancia main para acesso
 
                 //descobre a posição do form principal para centralizar o filho
                 int x = this.Left + (this.Width / 2) - (Form_conf.Width / 2);
